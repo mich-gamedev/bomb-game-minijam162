@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://7pqj5hj74nqq"]
+
+[ext_resource type="Script" path="res://obj/dirt/dirt_pooled.gd" id="1_fdee2"]
+[ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="1_uw05u"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_qeyke"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="3_y2wky"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="5_6hcx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmqt"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_povms"]
+size = Vector2(12, 12)
+
+[node name="PooledItem2D" type="Node2D"]
+script = ExtResource("1_fdee2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+shape = SubResource("RectangleShape2D_hwmqt")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_uw05u")
+
+[node name="Hitbox" type="Area2D" parent="StaticBody2D" node_paths=PackedStringArray("health")]
+script = ExtResource("2_qeyke")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="StaticBody2D/Hitbox"]
+script = ExtResource("3_y2wky")
+max_health = 0.5
+starting_health = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Hitbox"]
+visible = false
+shape = SubResource("RectangleShape2D_povms")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="NodePooler" type="Node" parent="."]
+script = ExtResource("5_6hcx4")
+pool_name = &"dirt"
+pool_scene = null
+default_count = 0
+
+[connection signal="died" from="StaticBody2D/Hitbox/Health" to="." method="_on_health_died"]

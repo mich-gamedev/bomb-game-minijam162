@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="5_hbx86"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_tbowg"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="7_8orc2"]
-[ext_resource type="PackedScene" uid="uid://b2vij8baleh0h" path="res://obj/dirt/dirt.tscn" id="8_5r82b"]
+[ext_resource type="PackedScene" uid="uid://7pqj5hj74nqq" path="res://obj/dirt/dirt_pooled.tscn" id="8_uma1i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmsq3"]
 atlas = ExtResource("1_acmkg")
@@ -121,7 +121,7 @@ shape = SubResource("RectangleShape2D_y4iqj")
 [node name="NodePooler" type="Node" parent="."]
 script = ExtResource("7_8orc2")
 pool_name = &"dirt"
-pool_scene = ExtResource("8_5r82b")
+pool_scene = ExtResource("8_uma1i")
 default_count = 1
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
