@@ -8,7 +8,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	var points: Array[Vector2]
-	var point_velocity: Vector2 = Vector2(char.old_dir * 128, -200).normalized() * 160.0
+	var point_velocity: Vector2 = Vector2(char.velocity.x, -200).normalized() * 160.0
 	var point_pos = Vector2.ZERO
 	var delta = 1.0/48.0
 	for i in 48:

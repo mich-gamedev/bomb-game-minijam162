@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c64hmrigvt1i8"]
+
+[ext_resource type="Texture2D" uid="uid://cjpy4xj275ufr" path="res://obj/triggers/groundenemyspawn.png" id="1_x3oa3"]
+
+[sub_resource type="GDScript" id="GDScript_hwyph"]
+script/source = "extends Sprite2D
+
+func _ready() -> void:
+	hide()
+"
+
+[node name="EnemySpawn" type="Sprite2D" groups=["ground_enemy_spawn"]]
+modulate = Color(1, 1, 1, 0.5)
+texture = ExtResource("1_x3oa3")
+script = SubResource("GDScript_hwyph")

@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	noise.offset.x += delta * 16
-	sprite_1.size.y = ((noise.get_noise_1d(0) + 1) * 32) + 10
+	sprite_1.size.y = ((noise.get_noise_1d(0) + 1) * 32)
 	sprite_1.position = -sprite_1.size
 	pivot.position.y = -sprite_1.size.y + 16
 	sprite_2.size = sprite_1.size

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl613xunl13ce"]
+
+[ext_resource type="Texture2D" uid="uid://dnru8cabpw6tq" path="res://obj/triggers/flying_enemy_spawn.png" id="1_bn7gp"]
+
+[sub_resource type="GDScript" id="GDScript_ffwlw"]
+script/source = "extends Sprite2D
+
+func _ready() -> void:
+	hide()
+"
+
+[node name="Sprite2D" type="Sprite2D" groups=["flying_enemy_spawn"]]
+modulate = Color(1, 1, 1, 0.5)
+texture = ExtResource("1_bn7gp")
+script = SubResource("GDScript_ffwlw")

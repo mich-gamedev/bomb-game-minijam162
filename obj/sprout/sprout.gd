@@ -3,29 +3,25 @@ extends CharacterBody2D
 @export var speed: float
 @export var gravity: float
 @export var terminal_velocity: float
-@onready var area_coll: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var node_pooler: NodePooler = $NodePooler
+@onready var ray_cast: RayCast2D = $RayCast2D
 
-
-var move_right: bool = randi_range(0,1) == 1
+func _ready() -> void:
+	velocity.x = speed * [-1,1].pick_random()
+	ray_cast.target_position.x = 8 * sign(velocity.x)
+	sprite.flip_h = velocity.x < 0
 
 func _physics_process(delta: float) -> void:
 	velocity.y = move_toward(velocity.y, terminal_velocity, gravity * delta)
-	if is_on_floor():
-		sprite.flip_h = !move_right
-		velocity.x = speed * lerp(-1,1,int(move_right))
-
-
+	if ray_cast.is_colliding():
+		velocity.x = -velocity.x
+		sprite.flip_h = velocity.x < 0
+		ray_cast.target_position.x = -ray_cast.target_position.x
+		print(velocity.x)
 	move_and_slide()
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	move_right = !move_right
-	area_coll.position.x = -area_coll.position.x
-
 
 func _on_health_died() -> void:
 	var inst = node_pooler.grab_available_object()
-	inst.global_position = global_position.snapped(Vector2.ONE * 8) - (Vector2.ONE * 4)
+	inst.global_position = ((global_position/8.0).round() * 8.0) - Vector2(4,4)
 

@@ -1,8 +1,10 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://dcpj66e46i12q"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://dcpj66e46i12q"]
 
 [ext_resource type="Texture2D" uid="uid://ctighvtsc2psr" path="res://resources/tileset/ground1/ground1.png" id="1_8xapr"]
 [ext_resource type="Texture2D" uid="uid://djjgyvimxm71d" path="res://resources/tileset/oneway1/oneway1.png" id="1_46bjb"]
 [ext_resource type="PackedScene" uid="uid://b2vij8baleh0h" path="res://obj/dirt/dirt.tscn" id="3_b8ike"]
+[ext_resource type="PackedScene" uid="uid://c64hmrigvt1i8" path="res://obj/triggers/ground_enemy_spawn.tscn" id="4_2jxmd"]
+[ext_resource type="PackedScene" uid="uid://dl613xunl13ce" path="res://obj/triggers/flying_enemy_spawn.tscn" id="5_f85fb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ps7x7"]
 texture = ExtResource("1_46bjb")
@@ -523,7 +525,13 @@ texture_region_size = Vector2i(8, 8)
 6:5/0/terrains_peering_bit/top_right_corner = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0cwbp"]
+resource_name = "interactable blocks"
 scenes/1/scene = ExtResource("3_b8ike")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_irr7n"]
+resource_name = "triggers"
+scenes/1/scene = ExtResource("4_2jxmd")
+scenes/2/scene = ExtResource("5_f85fb")
 
 [resource]
 tile_size = Vector2i(8, 8)
@@ -538,3 +546,4 @@ terrain_set_1/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_i4keo")
 sources/0 = SubResource("TileSetAtlasSource_ps7x7")
 sources/2 = SubResource("TileSetScenesCollectionSource_0cwbp")
+sources/3 = SubResource("TileSetScenesCollectionSource_irr7n")
