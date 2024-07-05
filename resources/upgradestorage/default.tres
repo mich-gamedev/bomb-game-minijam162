@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeStorage" load_steps=2 format=3 uid="uid://dwncxs7oqnnb8"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/upgrades.gd" id="1_nuwlt"]
+
+[resource]
+script = ExtResource("1_nuwlt")
+player_speed = 1
+player_gravity = 1
+player_jump = 1
+bomb_gravity = 1
+bomb_speed = 1
+explosion_radius = 1
+bomb_count = 1

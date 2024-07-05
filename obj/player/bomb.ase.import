@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cfydwj2uetab3"
+path="res://.godot/imported/bomb.ase-3c7a7987e0bf30d90e7233e2c65fc06b.res"
+
+[deps]
+
+source_file="res://obj/player/bomb.ase"
+dest_files=["res://.godot/imported/bomb.ase-3c7a7987e0bf30d90e7233e2c65fc06b.res"]
+
+[params]
+

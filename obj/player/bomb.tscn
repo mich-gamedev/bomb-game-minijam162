@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://btlb3mqfsxhfk"]
+
+[ext_resource type="Script" path="res://obj/player/bomb.gd" id="1_53y40"]
+[ext_resource type="Texture2D" uid="uid://c7spisqomwetx" path="res://obj/player/bomb.png" id="2_4jkah"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="3_ekhxo"]
+[ext_resource type="PackedScene" uid="uid://dvcnq857ap0ms" path="res://obj/player/explosion.tscn" id="4_tx42s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krv5a"]
+atlas = ExtResource("2_4jkah")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qhus"]
+atlas = ExtResource("2_4jkah")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pn08n"]
+atlas = ExtResource("2_4jkah")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig2on"]
+atlas = ExtResource("2_4jkah")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p232e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krv5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qhus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pn08n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig2on")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vm5bq"]
+radius = 4.0
+
+[node name="Bullet" type="CharacterBody2D" groups=["player_bomb"]]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_53y40")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_p232e")
+autoplay = "default"
+frame_progress = 0.474596
+offset = Vector2(0, -0.5)
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/player/bomb.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "adf6f49915225ecd8f71701296691a01"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vm5bq")
+
+[node name="NodePooler" type="Node" parent="."]
+script = ExtResource("3_ekhxo")
+pool_name = &"bomb_explosion"
+pool_scene = ExtResource("4_tx42s")
+default_count = 4
+
+[connection signal="bounced" from="." to="." method="_on_bounced"]

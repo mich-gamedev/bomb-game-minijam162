@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://nebhl1hrmhu5"]
+
+[ext_resource type="Script" path="res://addons/nine_patch_sprite_2d/nine_patch_sprite_2d.gd" id="1_sqyog"]
+[ext_resource type="Script" path="res://obj/longlegs/longlegs.gd" id="1_xwdt1"]
+[ext_resource type="Texture2D" uid="uid://dytmvv15aclyv" path="res://obj/longlegs/longlegs1.png" id="3_eijor"]
+[ext_resource type="Texture2D" uid="uid://cprw635f7ayxq" path="res://obj/longlegs/longlegs2.png" id="4_l6eo5"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="4_vk1we"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="5_hwwnc"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="6_1sn1o"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="7_o8f6n"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uf7jc"]
+resource_local_to_scene = true
+fractal_octaves = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxql5"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2h0u"]
+size = Vector2(8, 8)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xwdt1")
+noise = SubResource("FastNoiseLite_uf7jc")
+
+[node name="NinePatchSprite2D" type="Node2D" parent="."]
+position = Vector2(0, -16)
+script = ExtResource("1_sqyog")
+texture = ExtResource("3_eijor")
+size = Vector2(8, 16)
+patch_margin_top = 8
+patch_margin_bottom = 2
+centered = false
+
+[node name="NinePatchSprite2D2" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(0, -16)
+script = ExtResource("1_sqyog")
+texture = ExtResource("4_l6eo5")
+size = Vector2(8, 16)
+patch_margin_top = 8
+patch_margin_bottom = 2
+centered = false
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="Hurtbox" type="Area2D" parent="Node2D"]
+script = ExtResource("4_vk1we")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hurtbox"]
+position = Vector2(4, -12)
+shape = SubResource("RectangleShape2D_mxql5")
+
+[node name="Hitbox" type="Area2D" parent="Node2D" node_paths=PackedStringArray("health")]
+script = ExtResource("5_hwwnc")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="Node2D/Hitbox"]
+script = ExtResource("6_1sn1o")
+max_health = 2.0
+starting_health = 2.0
+
+[node name="FreeOnDeath" type="Node" parent="Node2D/Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("7_o8f6n")
+health = NodePath("..")
+actor = NodePath("../../../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hitbox"]
+position = Vector2(4, -12)
+shape = SubResource("RectangleShape2D_mxql5")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="Node2D"]
+collision_layer = 3
+collision_mask = 3
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/AnimatableBody2D"]
+position = Vector2(4, -12)
+shape = SubResource("RectangleShape2D_v2h0u")

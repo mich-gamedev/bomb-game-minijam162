@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2vij8baleh0h"]
+
+[ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="1_67byu"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_ios2o"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="3_gc1dh"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="4_qd01g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmqt"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_povms"]
+size = Vector2(12, 12)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_hwmqt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_67byu")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("2_ios2o")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("3_gc1dh")
+max_health = 0.5
+starting_health = 0.5
+
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("4_qd01g")
+health = NodePath("..")
+actor = NodePath("../../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+shape = SubResource("RectangleShape2D_povms")
+debug_color = Color(0, 0.6, 0.701961, 0)

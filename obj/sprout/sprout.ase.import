@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://buduyq4lddle3"
+path="res://.godot/imported/sprout.ase-06abf57c90993949c311cd67c434cf68.res"
+
+[deps]
+
+source_file="res://obj/sprout/sprout.ase"
+dest_files=["res://.godot/imported/sprout.ase-06abf57c90993949c311cd67c434cf68.res"]
+
+[params]
+

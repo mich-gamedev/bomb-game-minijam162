@@ -1,0 +1,137 @@
+[gd_scene load_steps=18 format=3 uid="uid://b8iuxvju8vwjo"]
+
+[ext_resource type="Texture2D" uid="uid://cp6m6v2sbf46w" path="res://obj/sprout/sprout.png" id="1_acmkg"]
+[ext_resource type="Script" path="res://obj/sprout/sprout.gd" id="1_g5lys"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_hl75d"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="3_lbhdm"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="5_hbx86"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_tbowg"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="7_8orc2"]
+[ext_resource type="PackedScene" uid="uid://b2vij8baleh0h" path="res://obj/dirt/dirt.tscn" id="8_5r82b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmsq3"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m01cd"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_280pw"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stq22"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hnl0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmsq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m01cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_280pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stq22")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cac36"]
+size = Vector2(8, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5flv3"]
+size = Vector2(8, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0shx"]
+size = Vector2(2, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4iqj"]
+size = Vector2(10, 5)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_g5lys")
+speed = 32.0
+gravity = 960.0
+terminal_velocity = 256.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8hnl0")
+autoplay = "default"
+frame_progress = 0.277955
+offset = Vector2(1, -6)
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/sprout/sprout.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "ca6d23e717e8a72a1310a788b411ee0b"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_cac36")
+
+[node name="JumpHitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("2_hl75d")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="JumpHitbox"]
+script = ExtResource("3_lbhdm")
+max_health = 1.0
+starting_health = 1.0
+
+[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("5_tbowg")
+health = NodePath("..")
+actor = NodePath("../../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_5flv3")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5, -1)
+shape = SubResource("RectangleShape2D_b0shx")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("5_hbx86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_y4iqj")
+
+[node name="NodePooler" type="Node" parent="."]
+script = ExtResource("7_8orc2")
+pool_name = &"dirt"
+pool_scene = ExtResource("8_5r82b")
+default_count = 1
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("2_hl75d")
+health = NodePath("../JumpHitbox/Health")
+team = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_y4iqj")
+
+[connection signal="died" from="JumpHitbox/Health" to="." method="_on_health_died"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
