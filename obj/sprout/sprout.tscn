@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8iuxvju8vwjo"]
+[gd_scene load_steps=18 format=3 uid="uid://b8iuxvju8vwjo"]
 
 [ext_resource type="Texture2D" uid="uid://cp6m6v2sbf46w" path="res://obj/sprout/sprout.png" id="1_acmkg"]
 [ext_resource type="Script" path="res://obj/sprout/sprout.gd" id="1_g5lys"]
@@ -49,14 +49,17 @@ animations = [{
 size = Vector2(8, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5flv3"]
-size = Vector2(8, 2)
+size = Vector2(14, 2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4iqj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gephr"]
+size = Vector2(10, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2tmu"]
 size = Vector2(10, 5)
 
 [node name="Sprout" type="CharacterBody2D" groups=["enemy"]]
-collision_layer = 2
-collision_mask = 5
+collision_layer = 130
+collision_mask = 133
 script = ExtResource("1_g5lys")
 speed = 32.0
 gravity = 960.0
@@ -107,8 +110,8 @@ shape = SubResource("RectangleShape2D_5flv3")
 script = ExtResource("5_hbx86")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_y4iqj")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_gephr")
 
 [node name="NodePooler" type="Node" parent="."]
 script = ExtResource("7_8orc2")
@@ -123,7 +126,7 @@ team = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_y4iqj")
+shape = SubResource("RectangleShape2D_y2tmu")
 
 [node name="LeftRaycast" type="RayCast2D" parent="."]
 position = Vector2(0, -3)

@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var fall_gravity: float
 @export var terminal_velocity: float
 @export var knockback: float
+@export var knockback_gravity: float
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var buffer_timer: Timer = $BufferTimer
@@ -18,6 +19,8 @@ extends CharacterBody2D
 @onready var jump_anim: AnimationPlayer = $JumpParticle/AnimationPlayer
 @onready var label: Label = $Label
 @onready var walk_particle: GPUParticles2D = $WalkParticle
+@onready var hit_stutter: AnimationPlayer = $AnimatedSprite2D/HitStutter
+@onready var health: Health = $Hitbox/Health
 
 var hp: TextureRect
 
@@ -33,6 +36,7 @@ signal direction_changed(old:float, new:float)
 @onready var gravity: float = fall_gravity
 
 var finished_level: bool
+var knocked_back: bool
 
 func _ready():
 	hp = get_tree().get_nodes_in_group("Health")[0]
@@ -45,10 +49,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, speed * dir * Upgrades.current.player_speed, accel * delta)
 		if is_on_floor():
 			jump_combo = 0
-			sprite.play(&"walk")
+			if !knocked_back:
+				sprite.play(&"walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
-		if is_on_floor():
+		if is_on_floor() and !knocked_back:
 			sprite.play(&"idle")
 	if dir != old_dir:
 		direction_changed.emit(old_dir, dir)
@@ -62,8 +67,10 @@ func _physics_process(delta: float) -> void:
 		buffer_timer.start()
 	if Input.is_action_just_released("jump"):
 		gravity = fall_gravity
-		sprite.play(&"fall")
-	if is_on_floor(): was_on_floor = true
+		if !knocked_back:
+			sprite.play(&"fall")
+	if is_on_floor():
+		was_on_floor = true
 	elif was_on_floor: coyote_timer.start()
 	if attempting_jump and was_on_floor:
 		velocity.y = -jump_speed * Upgrades.current.player_jump
@@ -80,10 +87,16 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("jump"):
 			gravity = jump_gravity
 
+	if knocked_back:
+		gravity = knockback_gravity
 	velocity.y = move_toward(velocity.y, terminal_velocity * Upgrades.current.player_gravity, gravity * delta)
 	if finished_level:
 		walk_particle.emitting = true
 		walk_particle.amount = 48
+
+	if health.can_harm: hit_stutter.play(&"RESET")
+	else: hit_stutter.play(&"harmed")
+
 	move_and_slide()
 
 func _on_buffer_timer_timeout() -> void:
@@ -91,7 +104,8 @@ func _on_buffer_timer_timeout() -> void:
 func _on_coyote_timer_timeout() -> void:
 	was_on_floor = false
 func _on_jump_variation_timer_timeout() -> void:
-	sprite.play(&"fall")
+	if !knocked_back:
+		sprite.play(&"fall")
 	gravity = fall_gravity
 
 
@@ -106,6 +120,7 @@ func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
 	label.text = "%dx" % jump_combo
 	label.global_position = global_position + Vector2(2,3)
 	velocity.y = -jump_speed * Upgrades.current.player_jump
+	knocked_back = false
 	if hitbox.is_in_group(&"end_spring"):
 		velocity.y = 0
 		jump_gravity = -560
@@ -120,8 +135,14 @@ func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
 
 
 func _on_hitbox_hurtbox_entered(hurtbox):
-	var vec = Vector2(global_position - hurtbox.global_position) * knockback
-	velocity += vec
+	knocked_back = true
+	var vec = Vector2((global_position - hurtbox.global_position) + (Vector2.UP * 6)).normalized() * knockback
+	velocity = vec
+	sprite.play(&"hitflash")
+	await sprite.animation_finished
+	sprite.play(&"kb")
+	await get_tree().create_timer(0.33).timeout
+	knocked_back = false
 
 
 func _on_health_harmed(amount):

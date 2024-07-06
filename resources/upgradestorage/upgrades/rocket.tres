@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://cqq4rxuldhkom"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_xvja7"]
+
+[resource]
+script = ExtResource("1_xvja7")
+title = "rocket"
+description = "[pos]+[/color]15% bomb height
+[neu]-[/color]50% bomb gravity
+"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+bomb_gravity = 0.5
+bomb_speed = 1.15
+bomb_damage = 1.0
+bomb_spread = 0
+explosion_radius = 1.0
+bomb_count = 0

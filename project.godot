@@ -59,7 +59,9 @@ jump={
 2d_physics/layer_2="BOMB BODY"
 2d_physics/layer_3="SEMISOLID"
 2d_physics/layer_4="EXPLOSION"
+2d_physics/layer_5="ENEMIES"
 2d_physics/layer_6="BOMB DETECTION"
+2d_physics/layer_8="PLAYER COLLISION"
 2d_physics/layer_9="PLAYER BOTTOM DAMAGE"
 
 [rendering]

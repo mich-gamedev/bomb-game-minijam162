@@ -5,7 +5,7 @@ extends Area2D
 @onready var upgrade_ui: Control = $UpgradeUI
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var title: Label = %Title
-@onready var desc: Label = %Description
+@onready var desc: RichTextLabel = %Description
 @onready var trans: AnimationPlayer = $CanvasLayer/AnimationPlayer
 @onready var spring_coll: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var timer: Timer = $Timer
@@ -16,7 +16,7 @@ func _ready() -> void:
 	noise.seed = randi()
 	upgrade = Upgrades.possible_upgrades.pick_random() as UpgradePurchase
 	title.text = upgrade.title
-	desc.text = upgrade.description
+	desc.text = upgrade.description.to_upper().replace("[POS]", "[color=#beff00]").replace("[NEU]", "[color=#00beff]").replace("[NEG]", "[color=#ff00be]").replace("[/COLOR]", "[/color]")
 	EnemySpawner.world_ended.connect(_on_world_ended)
 	visible = false
 

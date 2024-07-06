@@ -32,6 +32,7 @@ func _process(delta: float) -> void:
 		wave += 1
 		wave_just_started.emit()
 		if wave >= 4:
+			enemy_count += randi_range(0,2)
 			world_ended.emit()
 			world += 1
 			return

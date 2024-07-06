@@ -209,6 +209,8 @@ _data = {
 }
 
 [node name="Area2D" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_5x0jf")
 noise = SubResource("FastNoiseLite_fsnwq")
 
@@ -252,13 +254,17 @@ layout_mode = 2
 theme_override_constants/separation = 3
 theme_override_styles/separator = SubResource("StyleBoxLine_j2mmq")
 
-[node name="Description" type="Label" parent="UpgradeUI/PanelContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="UpgradeUI/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 0
-text = "-10% gravity"
-label_settings = SubResource("LabelSettings_odfmm")
-uppercase = true
+size_flags_vertical = 3
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("3_hn8oa")
+theme_override_font_sizes/normal_font_size = 4
+bbcode_enabled = true
+text = "[color=#ff00be]-[/color]10% GRAVITY"
+fit_content = true
+autowrap_mode = 0
 
 [node name="TextureRect" type="TextureRect" parent="UpgradeUI"]
 layout_mode = 0
