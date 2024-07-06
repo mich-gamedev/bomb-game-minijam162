@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://df2pmh17aheq5"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_nt48v"]
+
+[resource]
+script = ExtResource("1_nt48v")
+title = "look ma. no hands"
+description = "+15deg bomb spread"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.0
+bomb_spread = 15
+explosion_radius = 1.0
+bomb_count = 0

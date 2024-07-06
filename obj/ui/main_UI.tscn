@@ -116,7 +116,8 @@ texture = ExtResource("2_e8k3n")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Label" type="Label" parent="MarginContainer/Control/VBoxContainer"]
+[node name="WorldLabel" type="Label" parent="MarginContainer/Control/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "W-0"
 label_settings = SubResource("LabelSettings_msix2")

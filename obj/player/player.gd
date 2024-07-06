@@ -18,7 +18,6 @@ extends CharacterBody2D
 @onready var jump_anim: AnimationPlayer = $JumpParticle/AnimationPlayer
 @onready var label: Label = $Label
 @onready var walk_particle: GPUParticles2D = $WalkParticle
-@onready var control = $"../CanvasLayer2/Control"
 
 var hp: TextureRect
 
@@ -36,7 +35,7 @@ signal direction_changed(old:float, new:float)
 var finished_level: bool
 
 func _ready():
-	hp = control.get_tree().get_nodes_in_group("Health")[0]
+	hp = get_tree().get_nodes_in_group("Health")[0]
 
 func _physics_process(delta: float) -> void:
 	var dir := Input.get_axis("left", "right")
@@ -76,6 +75,7 @@ func _physics_process(delta: float) -> void:
 		fire_bullet.damage = Upgrades.current.bomb_damage
 		fire_bullet.speed = 160 * Upgrades.current.bomb_speed
 		fire_bullet.projectile_count = Upgrades.current.bomb_count
+		fire_bullet.projectile_range
 		fire_bullet.fire(velocity.angle())
 		if Input.is_action_pressed("jump"):
 			gravity = jump_gravity

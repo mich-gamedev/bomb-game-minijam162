@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 func cycle_spawn_rates() -> void:
 	spawnable_enemies.clear()
 	for spawn: EnemySpawnRate in spawn_rates:
-		for i in spawn.spawn_rate.sample(world / spawn.world_max):
+		for i in spawn.spawn_rate.sample(float(world) / float(spawn.world_max)):
 			spawnable_enemies.append(spawn.data)
 
 

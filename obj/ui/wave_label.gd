@@ -2,9 +2,11 @@ extends RichTextLabel
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var player_icon: TextureRect = %PlayerIcon
+@onready var world_label: Label = %WorldLabel
 
 func _ready() -> void:
 	EnemySpawner.wave_just_started.connect(_flash_label)
+	world_label.text = "world-%d" % EnemySpawner.world
 
 func _flash_label() -> void:
 	if EnemySpawner.wave <= 3:
