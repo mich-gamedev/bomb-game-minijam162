@@ -107,7 +107,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 0
 
-[node name="HP" type="TextureRect" parent="MarginContainer/Control/VBoxContainer"]
+[node name="HP" type="TextureRect" parent="MarginContainer/Control/VBoxContainer" groups=["Health"]]
 custom_minimum_size = Vector2(27, 8)
 layout_mode = 2
 size_flags_horizontal = 0

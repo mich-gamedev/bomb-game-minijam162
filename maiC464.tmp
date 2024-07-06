@@ -122,3 +122,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 5.96046e-08)
 color = Color(0, 0, 0, 1)
+
+[connection signal="body_entered" from="TileMap/@Area2D@116133" to="TileMap/@Area2D@116133" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@116133" to="TileMap/@Area2D@116133" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMap/@Area2D@116134" to="TileMap/@Area2D@116134" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@116134" to="TileMap/@Area2D@116134" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMap/@Area2D@116135" to="TileMap/@Area2D@116135" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@116135" to="TileMap/@Area2D@116135" method="_on_body_exited"]

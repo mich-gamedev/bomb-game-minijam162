@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cpib3ohf10c14"]
+[gd_scene load_steps=42 format=3 uid="uid://cpib3ohf10c14"]
 
 [ext_resource type="Texture2D" uid="uid://cbd5ma4ejm8sh" path="res://obj/player/player.png" id="1_5gjv1"]
 [ext_resource type="Script" path="res://obj/player/player.gd" id="1_b27ee"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="7_moapk"]
 [ext_resource type="Texture2D" uid="uid://fxs4i0ctxfew" path="res://obj/player/jump_particle.png" id="8_opi38"]
 [ext_resource type="FontFile" uid="uid://coefsgybiqqqs" path="res://obj/ui/5x5-boxy.ttf" id="9_j13xo"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="10_m706b"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="11_ap08e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o5cyo"]
 atlas = ExtResource("1_5gjv1")
@@ -256,6 +258,9 @@ scale_max = 3.0
 scale_curve = SubResource("CurveTexture_ncnnn")
 color_initial_ramp = SubResource("GradientTexture1D_ac50r")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7dad"]
+size = Vector2(8, 11)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 5
 collision_mask = 5
@@ -267,11 +272,12 @@ jump_speed = 200.0
 jump_gravity = 560.0
 fall_gravity = 1080.0
 terminal_velocity = 256.0
+knockback = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_mcb2e")
-animation = &"jump"
+animation = &"idle"
 offset = Vector2(0, -8)
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -366,8 +372,24 @@ label_settings = SubResource("LabelSettings_ig31y")
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_2jchn")
 
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("10_m706b")
+health = NodePath("Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_o7dad")
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("11_ap08e")
+max_health = 100.0
+starting_health = 3.0
+invincibility_time = 0.5
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="BufferTimer" to="." method="_on_buffer_timer_timeout"]
 [connection signal="timeout" from="JumpVariationTimer" to="." method="_on_jump_variation_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]
+[connection signal="hurtbox_entered" from="Hitbox" to="." method="_on_hitbox_hurtbox_entered"]
+[connection signal="harmed" from="Hitbox/Health" to="." method="_on_health_harmed"]

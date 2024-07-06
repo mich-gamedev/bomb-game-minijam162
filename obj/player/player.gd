@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var jump_gravity: float
 @export var fall_gravity: float
 @export var terminal_velocity: float
+@export var knockback: float
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var buffer_timer: Timer = $BufferTimer
@@ -17,6 +18,9 @@ extends CharacterBody2D
 @onready var jump_anim: AnimationPlayer = $JumpParticle/AnimationPlayer
 @onready var label: Label = $Label
 @onready var walk_particle: GPUParticles2D = $WalkParticle
+@onready var control = $"../CanvasLayer2/Control"
+
+var hp: TextureRect
 
 var was_on_floor: bool
 var attempting_jump: bool
@@ -31,6 +35,8 @@ signal direction_changed(old:float, new:float)
 
 var finished_level: bool
 
+func _ready():
+	hp = control.get_tree().get_nodes_in_group("Health")[0]
 
 func _physics_process(delta: float) -> void:
 	var dir := Input.get_axis("left", "right")
@@ -111,3 +117,13 @@ func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
 	jump_particle.rotation = velocity.angle() + (PI/2)
 	jump_anim.play(&"hit")
 	sprite.play(&"jump")
+
+
+func _on_hitbox_hurtbox_entered(hurtbox):
+	var vec = Vector2(global_position - hurtbox.global_position) * knockback
+	velocity += vec
+
+
+func _on_health_harmed(amount):
+	if hp.custom_minimum_size.x > 0:
+		hp.custom_minimum_size.x -= 9 * amount
