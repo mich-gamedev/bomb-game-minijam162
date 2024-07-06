@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ObjectPool="*res://components/object pooling/pool_storage.gd"
 Upgrades="*res://components/upgrades/upgrades.gd"
+EnemySpawner="*res://components/enemy spawning/EnemySpawner.tscn"
 
 [display]
 

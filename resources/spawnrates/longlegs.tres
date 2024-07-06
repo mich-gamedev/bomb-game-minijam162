@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemySpawnRate" load_steps=6 format=3 uid="uid://b3lbqh8gffl3g"]
+
+[ext_resource type="PackedScene" uid="uid://nebhl1hrmhu5" path="res://obj/longlegs/longlegs.tscn" id="1_hvpfd"]
+[ext_resource type="Script" path="res://resources/spawnrates/spawnrate.gd" id="1_who22"]
+[ext_resource type="Script" path="res://resources/spawnrates/enemy_info.gd" id="2_k4amn"]
+
+[sub_resource type="Resource" id="Resource_ajt7w"]
+script = ExtResource("2_k4amn")
+scene = ExtResource("1_hvpfd")
+floating = false
+
+[sub_resource type="Curve" id="Curve_knfx3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_who22")
+data = SubResource("Resource_ajt7w")
+world_max = 20
+spawn_rate = SubResource("Curve_knfx3")

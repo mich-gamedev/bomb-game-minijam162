@@ -54,7 +54,8 @@ size = Vector2(8, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4iqj"]
 size = Vector2(10, 5)
 
-[node name="Sprout" type="CharacterBody2D"]
+[node name="Sprout" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
 script = ExtResource("1_g5lys")
 speed = 32.0
 gravity = 960.0
@@ -124,9 +125,14 @@ team = 1
 position = Vector2(0, -2.5)
 shape = SubResource("RectangleShape2D_y4iqj")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, -2)
-target_position = Vector2(16, 0)
+[node name="LeftRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(-5, 0)
+collision_mask = 3
+
+[node name="RightRaycast" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(5, 0)
 collision_mask = 3
 
 [connection signal="died" from="JumpHitbox/Health" to="." method="_on_health_died"]

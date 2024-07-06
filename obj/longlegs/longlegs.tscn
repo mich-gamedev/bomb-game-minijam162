@@ -4,7 +4,6 @@
 [ext_resource type="Script" path="res://obj/longlegs/longlegs.gd" id="1_xwdt1"]
 [ext_resource type="Texture2D" uid="uid://dytmvv15aclyv" path="res://obj/longlegs/longlegs1.png" id="3_eijor"]
 [ext_resource type="Texture2D" uid="uid://cprw635f7ayxq" path="res://obj/longlegs/longlegs2.png" id="4_l6eo5"]
-[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="4_vk1we"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="5_hwwnc"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="6_1sn1o"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="7_o8f6n"]
@@ -13,13 +12,16 @@
 resource_local_to_scene = true
 fractal_octaves = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mxql5"]
-size = Vector2(10, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yheg"]
+size = Vector2(10, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v2h0u"]
 size = Vector2(8, 8)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_76p3p"]
+b = Vector2(4, 0)
+
+[node name="LongLegs" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_xwdt1")
 noise = SubResource("FastNoiseLite_uf7jc")
 
@@ -45,22 +47,17 @@ centered = false
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(-8, 0)
 
-[node name="Hurtbox" type="Area2D" parent="Node2D"]
-script = ExtResource("4_vk1we")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hurtbox"]
-position = Vector2(4, -12)
-shape = SubResource("RectangleShape2D_mxql5")
-
 [node name="Hitbox" type="Area2D" parent="Node2D" node_paths=PackedStringArray("health")]
+collision_layer = 256
+collision_mask = 256
 script = ExtResource("5_hwwnc")
 health = NodePath("Health")
 team = 1
 
 [node name="Health" type="Node" parent="Node2D/Hitbox"]
 script = ExtResource("6_1sn1o")
-max_health = 2.0
-starting_health = 2.0
+max_health = 4.0
+starting_health = 4.0
 
 [node name="FreeOnDeath" type="Node" parent="Node2D/Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("7_o8f6n")
@@ -68,8 +65,8 @@ health = NodePath("..")
 actor = NodePath("../../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Hitbox"]
-position = Vector2(4, -12)
-shape = SubResource("RectangleShape2D_mxql5")
+position = Vector2(4, -17)
+shape = SubResource("RectangleShape2D_2yheg")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="Node2D"]
 collision_layer = 3
@@ -79,3 +76,8 @@ sync_to_physics = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/AnimatableBody2D"]
 position = Vector2(4, -12)
 shape = SubResource("RectangleShape2D_v2h0u")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("SegmentShape2D_76p3p")
