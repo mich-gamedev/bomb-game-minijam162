@@ -46,4 +46,4 @@ func _on_hitbox_hurtbox_entered(hurtbox: Hurtbox) -> void:
 		Upgrades.add_upgrade(upgrade)
 		trans.play(&"close")
 		await trans.animation_finished
-		get_tree().reload_current_scene()
+		get_tree().current_scene.reload()

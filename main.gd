@@ -5,8 +5,15 @@ const maps : Array[PackedScene] = [
 	preload("res://resources/map scenes/0.tscn"),
 ]
 
+var inst: Node2D
+
 func _ready() -> void:
-	var inst : Node2D = maps.pick_random().instantiate()
+	reload()
+
+func reload() -> void:
+	if inst != null:
+		inst.queue_free()
+	inst = maps.pick_random().instantiate()
 	add_child(inst)
 	EnemySpawner.wave = 0
 	EnemySpawner.active = true

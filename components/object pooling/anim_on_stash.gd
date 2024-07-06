@@ -6,4 +6,5 @@ class_name AnimateOnStash2D extends PooledItem2D
 func unstash_item(pooler: NodePooler, pool: StringName) -> void:
 	anim.play(anim_name)
 	await anim.animation_finished
-	pooler.stash(self)
+	if !is_instance_valid(pooler): queue_free()
+	else: pooler.stash(self)
