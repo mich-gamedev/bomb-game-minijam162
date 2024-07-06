@@ -1,6 +1,5 @@
 extends Area2D
 
-@export var noise: FastNoiseLite
 
 @onready var upgrade_ui: Control = $UpgradeUI
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -9,11 +8,13 @@ extends Area2D
 @onready var trans: AnimationPlayer = $CanvasLayer/AnimationPlayer
 @onready var spring_coll: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var timer: Timer = $Timer
+@onready var left_side_screen: VisibleOnScreenNotifier2D = $UpgradeUI/PanelContainer/Control2/LeftSideScreen
+@onready var right_side_screen: VisibleOnScreenNotifier2D = $UpgradeUI/PanelContainer/Control/RightSideScreen
+@onready var panel_container: PanelContainer = $UpgradeUI/PanelContainer
 
 var upgrade: UpgradePurchase
 
 func _ready() -> void:
-	noise.seed = randi()
 	upgrade = Upgrades.possible_upgrades.pick_random() as UpgradePurchase
 	title.text = upgrade.title
 	desc.text = upgrade.description.to_upper().replace("[POS]", "[color=#beff00]").replace("[NEU]", "[color=#00beff]").replace("[NEG]", "[color=#ff00be]").replace("[/COLOR]", "[/color]")
@@ -22,9 +23,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	spring_coll.disabled = !visible
-	if visible:
-		noise.offset.x += 5 * delta
-		upgrade_ui.rotation_degrees = noise.get_noise_1d(0) * 5
+	if !left_side_screen.is_on_screen(): panel_container.position.x += 8
+	if !right_side_screen.is_on_screen(): panel_container.position.x -= 8
 
 func _on_world_ended() -> void:
 	visible = true

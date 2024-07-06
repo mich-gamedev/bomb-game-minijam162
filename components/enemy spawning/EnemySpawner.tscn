@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://o1u3mrfjl36x"]
+[gd_scene load_steps=4 format=3 uid="uid://o1u3mrfjl36x"]
 
 [ext_resource type="Script" path="res://components/enemy spawning/EnemySpawner.gd" id="1_b6wst"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="2_nbdsw"]
+[ext_resource type="PackedScene" uid="uid://c7q7efeukt8nu" path="res://obj/enemy_spawnpoint/spawner.tscn" id="3_beh4l"]
 
 [node name="EnemySpawner" type="Node"]
 script = ExtResource("1_b6wst")
+
+[node name="NodePooler" type="Node" parent="." node_paths=PackedStringArray("default_parent")]
+script = ExtResource("2_nbdsw")
+pool_name = &"floor_spawners"
+pool_scene = ExtResource("3_beh4l")
+default_parent = NodePath("..")

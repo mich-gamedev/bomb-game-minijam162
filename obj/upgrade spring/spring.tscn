@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://gwm5y6p0x7aj"]
+[gd_scene load_steps=20 format=3 uid="uid://gwm5y6p0x7aj"]
 
 [ext_resource type="Script" path="res://obj/upgrade spring/spring.gd" id="1_5x0jf"]
 [ext_resource type="Texture2D" uid="uid://c0aqlc6ecaok2" path="res://obj/upgrade spring/spring.png" id="1_u77f4"]
@@ -7,9 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="5_hw5hh"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="6_s5g7v"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="7_jqv3u"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fsnwq"]
-fractal_octaves = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6qdx"]
 radius = 32.0
@@ -212,7 +209,6 @@ _data = {
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_5x0jf")
-noise = SubResource("FastNoiseLite_fsnwq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_y6qdx")
@@ -235,6 +231,22 @@ offset_top = -57.0
 offset_right = 28.0
 offset_bottom = -9.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qiil6")
+
+[node name="Control2" type="Control" parent="UpgradeUI/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="LeftSideScreen" type="VisibleOnScreenNotifier2D" parent="UpgradeUI/PanelContainer/Control2"]
+rect = Rect2(-2, -2, 4, 4)
+
+[node name="Control" type="Control" parent="UpgradeUI/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="RightSideScreen" type="VisibleOnScreenNotifier2D" parent="UpgradeUI/PanelContainer/Control"]
+rect = Rect2(-2, -2, 4, 4)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeUI/PanelContainer"]
 layout_mode = 2
