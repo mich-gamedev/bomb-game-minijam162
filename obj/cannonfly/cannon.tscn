@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyydlmngkqy4g"]
+
+[ext_resource type="Script" path="res://components/firebullet/bullet.gd" id="1_i25nk"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="2_cv5g3"]
+[ext_resource type="Texture2D" uid="uid://be2ncu7c4oou8" path="res://obj/cannonfly/cannon1.png" id="3_ibvqj"]
+[ext_resource type="Texture2D" uid="uid://bmunv2ikxnb5u" path="res://obj/cannonfly/cannon2.png" id="4_a3a7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2x467"]
+radius = 5.09902
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ohobk"]
+radius = 3.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wh7ph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ibvqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a3a7t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("1_i25nk")
+hurtbox = NodePath("Hurtbox")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("2_cv5g3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_2x467")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ohobk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wh7ph")
+autoplay = "default"
+frame_progress = 0.662297

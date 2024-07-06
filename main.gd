@@ -2,6 +2,6 @@ extends Node2D
 
 
 func _ready() -> void:
-	EnemySpawner.reset()
+	EnemySpawner.wave = 0
 	EnemySpawner.active = true
-	Upgrades.reset()
+	EnemySpawner.wave_started = false

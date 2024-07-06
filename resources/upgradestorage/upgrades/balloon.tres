@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://cn4i3wbdcsp2h"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_pqpk3"]
+
+[resource]
+script = ExtResource("1_pqpk3")
+title = "balloon"
+description = "-0.1% gravity"
+player_speed = 1.0
+player_gravity = 0.9
+player_jump = 1.0
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.0
+explosion_radius = 1.0
+bomb_count = 0

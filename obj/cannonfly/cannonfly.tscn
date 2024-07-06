@@ -1,0 +1,197 @@
+[gd_scene load_steps=24 format=3 uid="uid://c5vvlnxbm0q4c"]
+
+[ext_resource type="Script" path="res://obj/cannonfly/cannonfly.gd" id="1_35gav"]
+[ext_resource type="Texture2D" uid="uid://bpk2nfffo8xgh" path="res://obj/cannonfly/cannonfly.png" id="1_ssw8a"]
+[ext_resource type="Script" path="res://components/movement/CollideAndBounce.gd" id="3_dfgou"]
+[ext_resource type="Script" path="res://components/firebullet/fire_bullet.gd" id="4_wk65s"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="5_7qa34"]
+[ext_resource type="PackedScene" uid="uid://cyydlmngkqy4g" path="res://obj/cannonfly/cannon.tscn" id="6_km5f0"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="7_60oti"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="8_1jb6r"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="9_arufw"]
+[ext_resource type="Texture2D" uid="uid://fxs4i0ctxfew" path="res://obj/player/jump_particle.png" id="10_prt1g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xt3uh"]
+radius = 2.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o873l"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(14, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkmvf"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(28, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ulfu"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(0, 14, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhfm5"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(14, 14, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nogbh"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(28, 14, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slylv"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(0, 28, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytnd3"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(14, 28, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6pn5"]
+atlas = ExtResource("1_ssw8a")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5l72b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o873l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkmvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ulfu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkmvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhfm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nogbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slylv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytnd3")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6pn5")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gstac"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_4yn08"]
+resource_name = "hit"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y031k"]
+_data = {
+"hit": SubResource("Animation_4yn08")
+}
+
+[node name="CannonFly" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_35gav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("CircleShape2D_xt3uh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5l72b")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(2, 0)
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/cannonfly/cannonfly.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "dfcda69970782345bc72bbc127915ca8"
+
+[node name="CollideAndBounce" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_dfgou")
+body = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.66
+one_shot = true
+autostart = true
+
+[node name="FireBullet" type="Node2D" parent="." node_paths=PackedStringArray("timer", "pooler")]
+position = Vector2(8, 0)
+script = ExtResource("4_wk65s")
+speed = 48.0
+timer = NodePath("Timer")
+pooler = NodePath("NodePooler")
+
+[node name="Timer" type="Timer" parent="FireBullet"]
+wait_time = 0.05
+one_shot = true
+
+[node name="NodePooler" type="Node" parent="FireBullet"]
+script = ExtResource("5_7qa34")
+pool_name = &"cannon"
+pool_scene = ExtResource("6_km5f0")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("7_60oti")
+health = NodePath("Health")
+team = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_gstac")
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("8_1jb6r")
+max_health = 2.0
+starting_health = 2.0
+
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("9_arufw")
+health = NodePath("..")
+actor = NodePath("../../..")
+
+[node name="JumpParticle" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(5, 0)
+rotation = 1.5708
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("10_prt1g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="JumpParticle"]
+libraries = {
+"": SubResource("AnimationLibrary_y031k")
+}
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

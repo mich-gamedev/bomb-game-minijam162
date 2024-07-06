@@ -19,11 +19,9 @@ func _physics_process(delta: float) -> void:
 	if left_raycast.is_colliding():
 		velocity.x = speed
 		sprite.flip_h = false
-		print("moving right")
 	if right_raycast.is_colliding():
 		velocity.x = -speed
 		sprite.flip_h = true
-		print("moving left")
 	move_and_slide()
 
 func _on_health_died() -> void:

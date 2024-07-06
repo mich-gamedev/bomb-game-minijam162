@@ -30,15 +30,17 @@ func _ready() -> void:
 			add_and_stash()
 
 func _process(_delta: float) -> void:
-	var pool_dict = ObjectPool.pools[pool_name]
+	for i in ObjectPool.pools[pool_name]:
+		if !is_instance_valid(i): ObjectPool.pools[pool_name].erase(i)
+	var pool_dict: Dictionary = ObjectPool.pools[pool_name]
 	if auto_stash:
 		for i in pool_dict:
-			if !is_instance_valid(i): print(owner.scene_file_path)
+			if !is_instance_valid(i): return
 			pool_dict[i] = i.process_mode == Node.PROCESS_MODE_DISABLED
 
 func grab_available_object(unstash := true, fill_empty := true) -> Node:
 	var available: Array = ObjectPool.pools[pool_name].keys().filter(
-		func(n): return ObjectPool.pools[pool_name][n] == true)
+		func(n): return is_instance_valid(n) and ObjectPool.pools[pool_name][n] == true)
 	if available.is_empty():
 		assert(fill_empty, "pool of \"%s\" is empty, and (!fill_empty == true)" % pool_name)
 		var new = add_and_stash()

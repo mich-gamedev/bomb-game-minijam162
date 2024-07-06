@@ -22,6 +22,8 @@ size = Vector2(8, 8)
 b = Vector2(4, 0)
 
 [node name="LongLegs" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_xwdt1")
 noise = SubResource("FastNoiseLite_uf7jc")
 
@@ -29,8 +31,8 @@ noise = SubResource("FastNoiseLite_uf7jc")
 position = Vector2(0, -16)
 script = ExtResource("1_sqyog")
 texture = ExtResource("3_eijor")
-size = Vector2(8, 16)
-patch_margin_top = 8
+size = Vector2(10, 16)
+patch_margin_top = 10
 patch_margin_bottom = 2
 centered = false
 
@@ -40,7 +42,7 @@ position = Vector2(0, -16)
 script = ExtResource("1_sqyog")
 texture = ExtResource("4_l6eo5")
 size = Vector2(8, 16)
-patch_margin_top = 8
+patch_margin_top = 10
 patch_margin_bottom = 2
 centered = false
 
@@ -48,8 +50,8 @@ centered = false
 position = Vector2(-8, 0)
 
 [node name="Hitbox" type="Area2D" parent="Node2D" node_paths=PackedStringArray("health")]
-collision_layer = 256
-collision_mask = 256
+collision_layer = 257
+collision_mask = 257
 script = ExtResource("5_hwwnc")
 health = NodePath("Health")
 team = 1

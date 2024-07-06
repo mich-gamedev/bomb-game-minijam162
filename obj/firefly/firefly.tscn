@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://huxioaar0s23"]
+
+[ext_resource type="Texture2D" uid="uid://cq7ur60n4fgwv" path="res://obj/firefly/firefly.png" id="1_5cnsd"]
+[ext_resource type="Script" path="res://obj/firefly/firefly.gd" id="1_ugqop"]
+[ext_resource type="Script" path="res://components/movement/move_towards.gd" id="2_cegup"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="3_xdiuw"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="4_f15i3"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_ha0yx"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="5_pxyyn"]
+[ext_resource type="Script" path="res://components/movement/CollideAndBounce.gd" id="6_i04tc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s36e1"]
+atlas = ExtResource("1_5cnsd")
+region = Rect2(0, 0, 14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ympty"]
+atlas = ExtResource("1_5cnsd")
+region = Rect2(14, 0, 14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e25m4"]
+atlas = ExtResource("1_5cnsd")
+region = Rect2(0, 12, 14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unsdj"]
+atlas = ExtResource("1_5cnsd")
+region = Rect2(14, 12, 14, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scynb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s36e1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ympty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e25m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unsdj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwwxe"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57gjb"]
+size = Vector2(8, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x78bh"]
+size = Vector2(8, 7)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_ugqop")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_scynb")
+autoplay = "default"
+offset = Vector2(1, 0)
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/firefly/firefly.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b4533e46726f2f53f7fca51b54603484"
+
+[node name="MoveBodyTowards" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("2_cegup")
+speed = 48.0
+accel = 48.0
+offset = 0.261799
+body = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_pwwxe")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("3_xdiuw")
+health = NodePath("Health")
+team = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_57gjb")
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("4_f15i3")
+max_health = 1.0
+starting_health = 1.0
+
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("5_ha0yx")
+health = NodePath("..")
+actor = NodePath("../../..")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("5_pxyyn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_x78bh")
+
+[node name="CollideAndBounce" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("6_i04tc")
+body = NodePath("..")
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -15,9 +15,12 @@ extends CharacterBody2D
 @onready var fire_bullet: FireBullet = $FireBullet
 @onready var jump_particle: Sprite2D = $JumpParticle
 @onready var jump_anim: AnimationPlayer = $JumpParticle/AnimationPlayer
+@onready var label: Label = $Label
+@onready var walk_particle: GPUParticles2D = $WalkParticle
 
 var was_on_floor: bool
 var attempting_jump: bool
+var jump_combo: int = 0
 
 var old_dir: float
 
@@ -26,12 +29,17 @@ signal direction_changed(old:float, new:float)
 
 @onready var gravity: float = fall_gravity
 
+var finished_level: bool
+
 
 func _physics_process(delta: float) -> void:
 	var dir := Input.get_axis("left", "right")
 	if sign(dir):
+		if !finished_level:
+			walk_particle.emitting = is_on_floor() or velocity.y < 0
 		velocity.x = move_toward(velocity.x, speed * dir * Upgrades.current.player_speed, accel * delta)
 		if is_on_floor():
+			jump_combo = 0
 			sprite.play(&"walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
@@ -66,8 +74,10 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_pressed("jump"):
 			gravity = jump_gravity
 
-	velocity.y = move_toward(velocity.y, terminal_velocity, gravity * delta * Upgrades.current.player_gravity)
-
+	velocity.y = move_toward(velocity.y, terminal_velocity * Upgrades.current.player_gravity, gravity * delta)
+	if finished_level:
+		walk_particle.emitting = true
+		walk_particle.amount = 48
 	move_and_slide()
 
 func _on_buffer_timer_timeout() -> void:
@@ -86,9 +96,18 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
-	print("jumped on enemy")
+	jump_combo += 1
+	label.text = "%dx" % jump_combo
+	label.global_position = global_position + Vector2(2,3)
 	velocity.y = -jump_speed * Upgrades.current.player_jump
+	if hitbox.is_in_group(&"end_spring"):
+		velocity.y = 0
+		jump_gravity = -560
+		fall_gravity = -560
+		gravity = fall_gravity
+		finished_level = true
 	jump_anim.stop()
 	jump_particle.global_position = global_position
+	jump_particle.rotation = velocity.angle() + (PI/2)
 	jump_anim.play(&"hit")
 	sprite.play(&"jump")

@@ -1,0 +1,326 @@
+[gd_scene load_steps=21 format=3 uid="uid://gwm5y6p0x7aj"]
+
+[ext_resource type="Script" path="res://obj/upgrade spring/spring.gd" id="1_5x0jf"]
+[ext_resource type="Texture2D" uid="uid://c0aqlc6ecaok2" path="res://obj/upgrade spring/spring.png" id="1_u77f4"]
+[ext_resource type="Texture2D" uid="uid://dwipoyy7234lx" path="res://obj/upgrade spring/springpanel.png" id="2_cbqm2"]
+[ext_resource type="FontFile" uid="uid://bk2rtg7ngxkvw" path="res://obj/ui/4x4-boxy.ttf" id="3_hn8oa"]
+[ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="5_hw5hh"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="6_s5g7v"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="7_jqv3u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fsnwq"]
+fractal_octaves = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6qdx"]
+radius = 32.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qiil6"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+texture = ExtResource("2_cbqm2")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_odfmm"]
+font = ExtResource("3_hn8oa")
+font_size = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_j2mmq"]
+color = Color(1, 0, 0.745098, 1)
+
+[sub_resource type="Animation" id="Animation_2nm0l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5nyrc"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.170755, 0.5, 1),
+"update": 0,
+"values": [Vector2(1.25, 0), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2amy3"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.267943, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(0, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q81n6"]
+_data = {
+"RESET": SubResource("Animation_2nm0l"),
+"close": SubResource("Animation_2amy3"),
+"open": SubResource("Animation_5nyrc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwgjq"]
+size = Vector2(16, 2)
+
+[sub_resource type="Animation" id="Animation_43rwu"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Black:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_i57ew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Black:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwdcw"]
+_data = {
+"RESET": SubResource("Animation_i57ew"),
+"close": SubResource("Animation_43rwu")
+}
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_5x0jf")
+noise = SubResource("FastNoiseLite_fsnwq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y6qdx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u77f4")
+
+[node name="UpgradeUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeUI"]
+custom_minimum_size = Vector2(56, 48)
+layout_mode = 0
+offset_left = -28.0
+offset_top = -57.0
+offset_right = 28.0
+offset_bottom = -9.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qiil6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="UpgradeUI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "BALLOON"
+label_settings = SubResource("LabelSettings_odfmm")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="UpgradeUI/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_j2mmq")
+
+[node name="Description" type="Label" parent="UpgradeUI/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "-0.1% gravity"
+label_settings = SubResource("LabelSettings_odfmm")
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeUI"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = -6.0
+texture = ExtResource("5_hw5hh")
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q81n6")
+}
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health") groups=["end_spring"]]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("6_s5g7v")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("7_jqv3u")
+max_health = 1.0
+starting_health = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_kwgjq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+root_node = NodePath("../Pink")
+libraries = {
+"": SubResource("AnimationLibrary_dwdcw")
+}
+
+[node name="Pink" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 168)
+color = Color(1, 0, 0.745098, 1)
+
+[node name="Black" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 168)
+color = Color(0, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="hurtbox_entered" from="Hitbox" to="." method="_on_hitbox_hurtbox_entered"]

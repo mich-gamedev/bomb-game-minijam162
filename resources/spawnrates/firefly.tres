@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemySpawnRate" load_steps=6 format=3 uid="uid://b11gup81525n7"]
+
+[ext_resource type="PackedScene" uid="uid://huxioaar0s23" path="res://obj/firefly/firefly.tscn" id="1_f24fb"]
+[ext_resource type="Script" path="res://resources/spawnrates/spawnrate.gd" id="1_fequ4"]
+[ext_resource type="Script" path="res://resources/spawnrates/enemy_info.gd" id="2_wks4e"]
+
+[sub_resource type="Resource" id="Resource_l1mng"]
+script = ExtResource("2_wks4e")
+scene = ExtResource("1_f24fb")
+floating = true
+
+[sub_resource type="Curve" id="Curve_ftemy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[resource]
+script = ExtResource("1_fequ4")
+data = SubResource("Resource_l1mng")
+world_max = 20
+spawn_rate = SubResource("Curve_ftemy")

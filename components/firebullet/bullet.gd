@@ -18,10 +18,13 @@ func _physics_process(delta: float) -> void:
 			bounces_left -= 1
 			velocity = velocity.bounce(coll_info.get_normal())
 		else:
-			pooler.stash(self)
+			if !is_instance_valid(pooler):
+				queue_free()
+			else:
+				pooler.stash(self)
 
 func stash_item(pooler: NodePooler, pool_name: StringName) -> void:
 	pass
 
-func unstash_item(pooler: NodePooler, pool_name: StringName) -> void:
+func unstash_item(p: NodePooler, pool_name: StringName) -> void:
 	pass

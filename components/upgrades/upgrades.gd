@@ -3,6 +3,10 @@ extends Node
 var current: UpgradeStorage = UpgradeStorage.new()
 var bought_upgrades: Array[UpgradeStorage]
 
+const possible_upgrades: Array[UpgradeStorage] = [
+	preload("res://resources/upgradestorage/upgrades/balloon.tres"),
+]
+
 func reset() -> void:
 	current = UpgradeStorage.new()
 
