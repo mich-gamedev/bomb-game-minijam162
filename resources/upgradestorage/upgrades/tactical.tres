@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://d3ititx70ssdx"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_km53y"]
+
+[resource]
+script = ExtResource("1_km53y")
+title = "tactical"
+description = "+20% explosion radius
++10% bomb damage
++5% bomb speed"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+bomb_gravity = 1.0
+bomb_speed = 1.05
+bomb_damage = 1.1
+explosion_radius = 1.2
+bomb_count = 0

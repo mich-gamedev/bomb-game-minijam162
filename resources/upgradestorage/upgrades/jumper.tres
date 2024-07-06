@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://lw2h418th8fp"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_tc7rs"]
+
+[resource]
+script = ExtResource("1_tc7rs")
+title = "jumper"
+description = "+20% jump height"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.2
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.0
+explosion_radius = 1.0
+bomb_count = 0

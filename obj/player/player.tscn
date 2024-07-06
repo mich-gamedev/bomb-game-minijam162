@@ -271,7 +271,7 @@ terminal_velocity = 256.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_mcb2e")
-animation = &"idle"
+animation = &"jump"
 offset = Vector2(0, -8)
 metadata/_aseprite_wizard_config_ = {
 "layer": "",

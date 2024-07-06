@@ -5,6 +5,13 @@ var bought_upgrades: Array[UpgradeStorage]
 
 const possible_upgrades: Array[UpgradeStorage] = [
 	preload("res://resources/upgradestorage/upgrades/balloon.tres"),
+	preload("res://resources/upgradestorage/upgrades/bomb_rain.tres"),
+	preload("res://resources/upgradestorage/upgrades/athlete.tres"),
+	preload("res://resources/upgradestorage/upgrades/runner.tres"),
+	preload("res://resources/upgradestorage/upgrades/tactical.tres"),
+	preload("res://resources/upgradestorage/upgrades/jumper.tres"),
+	preload("res://resources/upgradestorage/upgrades/heavy.tres"),
+	preload("res://resources/upgradestorage/upgrades/loaded.tres"),
 ]
 
 func reset() -> void:
@@ -17,3 +24,5 @@ func add_upgrade(upgrade: UpgradeStorage) -> void:
 			current.set(i["name"], current.get(i["name"]) + upgrade.get(i["name"]))
 		if i["type"] == TYPE_FLOAT:
 			current.set(i["name"], current.get(i["name"]) + upgrade.get(i["name"]) - 1.0)
+			if current.get(i["name"]) < 0.1:
+				current.set(i["name"], 0.1)

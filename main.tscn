@@ -5,6 +5,33 @@
 [ext_resource type="TileSet" uid="uid://dcpj66e46i12q" path="res://resources/tileset/ground1/ground1.tres" id="2_lb4s6"]
 [ext_resource type="PackedScene" uid="uid://dkyubl7e8ns6r" path="res://obj/ui/main_UI.tscn" id="5_4pxxc"]
 
+[sub_resource type="Animation" id="Animation_qwua4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 5.96046e-08)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Black:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 5.96046e-08)]
+}
+
 [sub_resource type="Animation" id="Animation_qxlem"]
 resource_name = "open"
 length = 0.6
@@ -31,33 +58,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(0.2, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qwua4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 5.96046e-08)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Black:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 5.96046e-08)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jl0lk"]
@@ -122,3 +122,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 5.96046e-08)
 color = Color(0, 0, 0, 1)
+
+[connection signal="body_entered" from="TileMap/@Area2D@168103" to="TileMap/@Area2D@168103" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@168103" to="TileMap/@Area2D@168103" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMap/@Area2D@168104" to="TileMap/@Area2D@168104" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@168104" to="TileMap/@Area2D@168104" method="_on_body_exited"]
+[connection signal="body_entered" from="TileMap/@Area2D@168105" to="TileMap/@Area2D@168105" method="_on_body_entered"]
+[connection signal="body_exited" from="TileMap/@Area2D@168105" to="TileMap/@Area2D@168105" method="_on_body_exited"]
