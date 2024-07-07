@@ -19,7 +19,6 @@ func _ready() -> void:
 	PlayerStats.player_died.connect(_on_player_died)
 
 func tutorial() -> void:
-	EnemySpawner.world_ended.emit()
 	UI.visible = false
 	inst = tutorial_map.instantiate()
 	add_child(inst)
@@ -37,5 +36,6 @@ func reload() -> void:
 func _on_player_died() -> void:
 	animation_player.play(&"end")
 	await animation_player.animation_finished
+	inst.queue_free()
 	tutorial()
 	#TODO: send user to main menu on death
