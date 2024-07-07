@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://jyygugr5t52p"
+path="res://.godot/imported/gluepawn.ase-d158a15a0c93c4049addd557d325b0f8.res"
+
+[deps]
+
+source_file="res://obj/gluepawn/gluepawn.ase"
+dest_files=["res://.godot/imported/gluepawn.ase-d158a15a0c93c4049addd557d325b0f8.res"]
+
+[params]
+
