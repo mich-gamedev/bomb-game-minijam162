@@ -11,6 +11,7 @@ func _ready() -> void:
 func kill():
 	await get_tree().create_timer(delay).timeout
 	await get_tree().process_frame
-	var inst = particle_pooler.grab_available_object()
-	inst.global_position = actor.global_position
+	if particle_pooler:
+		var inst = particle_pooler.grab_available_object()
+		inst.global_position = actor.global_position
 	actor.queue_free()
