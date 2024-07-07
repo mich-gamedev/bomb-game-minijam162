@@ -196,3 +196,4 @@ libraries = {
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="died" from="Hitbox/Health" to="." method="_on_health_died"]

@@ -36,7 +36,4 @@ func reload() -> void:
 func _on_player_died() -> void:
 	animation_player.play(&"end")
 	await animation_player.animation_finished
-	inst.queue_free()
-	tutorial()
-	animation_player.play(&"open")
-	await animation_player.animation_finished
+	get_tree().reload_current_scene()

@@ -10,6 +10,8 @@ class_name WalkAndBump extends Node
 signal bump_left
 signal bump_right
 
+var dead_body = preload("res://obj/cacturtle/dead_cac_turtle.tscn")
+
 func _ready() -> void:
 	pick_dir()
 
@@ -26,3 +28,10 @@ func _physics_process(delta: float) -> void:
 		actor.velocity.x = -speed
 		bump_right.emit()
 	actor.move_and_slide()
+
+
+func _on_health_died():
+	var body_inst = dead_body.instantiate()
+	body_inst.global_position = actor.global_position
+	get_parent().add_child(body_inst)
+	queue_free()

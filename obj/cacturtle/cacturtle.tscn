@@ -115,3 +115,5 @@ world_increment = 0.5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_kex2o")
+
+[connection signal="died" from="Hitbox/Health" to="WalkAndBump" method="_on_health_died"]

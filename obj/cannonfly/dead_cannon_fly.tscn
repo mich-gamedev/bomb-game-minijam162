@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4aeffl731rps"]
+
+[ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_cv7pw"]
+[ext_resource type="Texture2D" uid="uid://nwo62y6weo5j" path="res://obj/cannonfly/death.png" id="2_j4q61"]
+
+[node name="DeadCannonFly" type="Node2D"]
+script = ExtResource("1_cv7pw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j4q61")
