@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnvxsbgfk0e43"]
+
+[ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_xktlm"]
+[ext_resource type="Texture2D" uid="uid://dp21wvl2i115e" path="res://obj/cacturtle/death.png" id="2_arl6p"]
+
+[node name="DeadCacTurtle" type="Node2D"]
+script = ExtResource("1_xktlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_arl6p")

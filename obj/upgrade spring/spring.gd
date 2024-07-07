@@ -13,6 +13,7 @@ extends Area2D
 @onready var panel_container: PanelContainer = $UpgradeUI/PanelContainer
 
 var upgrade: UpgradePurchase
+@export var always_active: bool = false
 
 func _ready() -> void:
 	upgrade = Upgrades.possible_upgrades.pick_random() as UpgradePurchase
@@ -20,6 +21,8 @@ func _ready() -> void:
 	desc.text = upgrade.description.to_upper().replace("[POS]", "[color=#beff00]").replace("[NEU]", "[color=#00beff]").replace("[NEG]", "[color=#ff00be]").replace("[/COLOR]", "[/color]")
 	EnemySpawner.world_ended.connect(_on_world_ended)
 	visible = false
+	if always_active:
+		_on_world_ended()
 
 func _physics_process(delta: float) -> void:
 	spring_coll.disabled = timer.time_left or !(visible)

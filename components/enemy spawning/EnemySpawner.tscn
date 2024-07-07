@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://components/enemy spawning/EnemySpawner.gd" id="1_b6wst"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="2_nbdsw"]
-[ext_resource type="PackedScene" uid="uid://c7q7efeukt8nu" path="res://obj/enemy_spawnpoint/spawner.tscn" id="3_beh4l"]
+[ext_resource type="PackedScene" path="res://obj/enemy_spawnpoint/spawner.tscn" id="3_beh4l"]
 
 [node name="EnemySpawner" type="Node"]
 script = ExtResource("1_b6wst")

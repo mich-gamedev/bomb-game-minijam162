@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckx4ujbyo4fap"]
+
+[ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_f17vq"]
+[ext_resource type="Texture2D" uid="uid://bpqlfe3x8emrw" path="res://obj/longlegs/death.png" id="2_qd5lr"]
+
+[node name="DeadLongLegs" type="Node2D"]
+script = ExtResource("1_f17vq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qd5lr")

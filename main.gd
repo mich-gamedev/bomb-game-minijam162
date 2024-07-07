@@ -9,14 +9,23 @@ const maps : Array[PackedScene] = [
 ]
 
 @onready var animation_player: AnimationPlayer = $CanvasLayer3/AnimationPlayer
-
+var tutorial_map = preload("res://resources/map scenes/tutorial.tscn")
 var inst: Node2D
 
+@onready var UI = $CanvasLayer2
+
 func _ready() -> void:
-	reload()
+	tutorial()
 	PlayerStats.player_died.connect(_on_player_died)
 
+func tutorial() -> void:
+	EnemySpawner.world_ended.emit()
+	UI.visible = false
+	inst = tutorial_map.instantiate()
+	add_child(inst)
+
 func reload() -> void:
+	UI.visible = true
 	if inst != null:
 		inst.queue_free()
 	inst = maps.pick_random().instantiate()
