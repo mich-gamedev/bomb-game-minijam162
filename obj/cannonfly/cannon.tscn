@@ -28,6 +28,7 @@ animations = [{
 [node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
 script = ExtResource("1_i25nk")
 hurtbox = NodePath("Hurtbox")
+shootParticles = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("2_cv5g3")
@@ -42,3 +43,5 @@ shape = SubResource("CircleShape2D_ohobk")
 sprite_frames = SubResource("SpriteFrames_wh7ph")
 autoplay = "default"
 frame_progress = 0.662297
+
+[node name="SpawnParticles" type="Node2D" parent="."]

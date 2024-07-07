@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://blf7jkr8uid6"]
+
+[node name="cannonExplosion" type="CPUParticles2D"]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+scale_amount_max = 3.0
+color = Color(0, 0.419608, 0.752941, 1)
