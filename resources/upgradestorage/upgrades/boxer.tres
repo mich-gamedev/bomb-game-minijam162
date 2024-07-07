@@ -5,8 +5,9 @@
 [resource]
 script = ExtResource("1_wj8vv")
 title = "boxer"
-description = "[pos]+[/color]50% slam damage
-[neg]-[/color]50% bomb damage"
+description = "do [pos]+[/color]50% dmg
+on slam, but
+[neg]-[/color]50% bomb dmg"
 player_speed = 1.0
 player_gravity = 1.0
 player_jump = 1.0

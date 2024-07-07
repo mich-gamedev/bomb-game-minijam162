@@ -264,7 +264,7 @@ curve = SubResource("Curve2D_xptkt")
 point_0_angle = 3.14159
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("14_ace68")]
-position = Vector2(160, 144)
+position = Vector2(104, 160)
 
 [connection signal="finished" from="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D" to="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D" method="_on_finished"]
 [connection signal="finished" from="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D2" to="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D2" method="_on_finished"]

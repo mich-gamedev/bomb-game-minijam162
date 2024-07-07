@@ -5,12 +5,12 @@
 [resource]
 script = ExtResource("1_pqpk3")
 title = "balloon"
-description = "[neu]-[/color]35% gravity"
+description = "[neu]-[/color]25% gravity"
 player_speed = 1.0
-player_gravity = 0.65
+player_gravity = 0.75
 player_jump = 1.0
 player_slam_damage = 1.0
-bomb_gravity = 0.65
+bomb_gravity = 0.75
 bomb_speed = 1.0
 bomb_damage = 1.0
 bomb_spread = 0

@@ -52,7 +52,8 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_hitbox_hurtbox_entered(hurtbox: Hurtbox) -> void:
 	if visible and !timer.time_left:
 		visible = false
-		Upgrades.add_upgrade(upgrade)
+		if !always_active:
+			Upgrades.add_upgrade(upgrade)
 		trans.play(&"close")
 		await trans.animation_finished
 		get_tree().current_scene.reload()

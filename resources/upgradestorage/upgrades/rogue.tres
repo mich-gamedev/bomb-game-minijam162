@@ -5,14 +5,13 @@
 [resource]
 script = ExtResource("1_ne04r")
 title = "rogue"
-description = "[pos]+[/color]25% jump height
-[neu]+[/color]25% speed
-[neu]+[/color]35% gravity"
+description = "[pos]+[/color]25% jump height,
+speed, and gravity"
 player_speed = 1.25
-player_gravity = 1.35
+player_gravity = 1.25
 player_jump = 1.25
 player_slam_damage = 1.0
-bomb_gravity = 1.35
+bomb_gravity = 1.25
 bomb_speed = 1.25
 bomb_damage = 1.0
 bomb_spread = 0

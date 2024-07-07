@@ -5,9 +5,8 @@
 [resource]
 script = ExtResource("1_caw60")
 title = "pyrotechnic"
-description = "[pos]+[/color]50% explosion size
-[neu]-[/color]15deg bomb spread
-[neg]-[/color]25% bomb damage
+description = "fire [pos]+[/color]50% bigger,
+but [neg]-[/color]25% weaker bombs
 "
 player_speed = 1.0
 player_gravity = 1.0
@@ -16,6 +15,6 @@ player_slam_damage = 1.0
 bomb_gravity = 1.0
 bomb_speed = 1.0
 bomb_damage = 0.75
-bomb_spread = -15
+bomb_spread = 0
 explosion_radius = 1.5
 bomb_count = 0

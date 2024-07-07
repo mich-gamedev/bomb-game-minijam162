@@ -5,16 +5,16 @@
 [resource]
 script = ExtResource("1_0fe2p")
 title = "demolition"
-description = "[pos]+[/color]25% explosion size
-[neu]+[/color]40% bomb weight
+description = "fire [pos]+[/color]30% bigger,
+heavier bombs, but
 [neg]-[/color]25% slam damage"
 player_speed = 1.0
 player_gravity = 1.0
 player_jump = 1.0
 player_slam_damage = 0.75
-bomb_gravity = 1.4
+bomb_gravity = 1.3
 bomb_speed = 1.0
 bomb_damage = 1.0
 bomb_spread = 0
-explosion_radius = 1.25
+explosion_radius = 1.3
 bomb_count = 0

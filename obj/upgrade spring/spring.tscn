@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://obj/upgrade spring/spring.gd" id="1_5x0jf"]
 [ext_resource type="Texture2D" uid="uid://c0aqlc6ecaok2" path="res://obj/upgrade spring/spring.png" id="1_u77f4"]
 [ext_resource type="Texture2D" uid="uid://dwipoyy7234lx" path="res://obj/upgrade spring/springpanel.png" id="2_cbqm2"]
-[ext_resource type="FontFile" uid="uid://bk2rtg7ngxkvw" path="res://obj/ui/4x4-boxy.ttf" id="3_hn8oa"]
+[ext_resource type="FontFile" uid="uid://h27jaebsibm" path="res://obj/ui/4x4-boxy.ttf" id="3_hn8oa"]
 [ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="5_hw5hh"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="6_s5g7v"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="7_jqv3u"]

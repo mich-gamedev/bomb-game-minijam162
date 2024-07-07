@@ -7,10 +7,11 @@ script = ExtResource("1_km53y")
 title = "tactical"
 description = "[pos]+[/color]20% explosion size
 [pos]+[/color]10% bomb damage
-[pos]+[/color]5% bomb speed"
+[neg]-[/color]15% jump height"
 player_speed = 1.0
 player_gravity = 1.0
-player_jump = 1.0
+player_jump = 0.85
+player_slam_damage = 1.0
 bomb_gravity = 1.0
 bomb_speed = 1.05
 bomb_damage = 1.1

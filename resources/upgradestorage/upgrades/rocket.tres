@@ -5,14 +5,13 @@
 [resource]
 script = ExtResource("1_xvja7")
 title = "rocket"
-description = "[pos]+[/color]15% bomb height
-[neu]-[/color]50% bomb gravity
+description = "fire [pos]+[/color]30% lighter bombs
 "
 player_speed = 1.0
 player_gravity = 1.0
 player_jump = 1.0
 player_slam_damage = 1.0
-bomb_gravity = 0.5
+bomb_gravity = 0.7
 bomb_speed = 1.15
 bomb_damage = 1.0
 bomb_spread = 0
