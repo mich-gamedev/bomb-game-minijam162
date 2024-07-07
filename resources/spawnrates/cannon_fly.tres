@@ -11,7 +11,7 @@ floating = true
 
 [sub_resource type="Curve" id="Curve_5snte"]
 max_value = 5.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 2.08333), 0.0, 0.0, 0, 0, Vector2(1, 3.34184), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1.25), 0.0, 0.0, 0, 0, Vector2(1, 3.34184), 0.0, 0.0, 0, 0]
 point_count = 3
 metadata/_snap_enabled = true
 metadata/_snap_count = 12
