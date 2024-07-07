@@ -37,4 +37,5 @@ func reload() -> void:
 func _on_player_died() -> void:
 	animation_player.play(&"end")
 	await animation_player.animation_finished
+	tutorial()
 	#TODO: send user to main menu on death
