@@ -36,13 +36,13 @@ func _on_world_ended() -> void:
 		timer.start()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group(&"player") and visible:
+	if body.is_in_group(&"player") and visible and !always_active:
 		anim.play(&"open")
 		timer.start()
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group(&"player") and visible:
+	if body.is_in_group(&"player") and visible and !always_active:
 		anim.play(&"close")
 
 

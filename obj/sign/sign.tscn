@@ -1,0 +1,183 @@
+[gd_scene load_steps=12 format=3 uid="uid://cl60iojsam726"]
+
+[ext_resource type="Script" path="res://obj/sign/sign.gd" id="1_hy4m6"]
+[ext_resource type="Texture2D" uid="uid://dwipoyy7234lx" path="res://obj/upgrade spring/springpanel.png" id="1_oqa51"]
+[ext_resource type="FontFile" uid="uid://bk2rtg7ngxkvw" path="res://obj/ui/4x4-boxy.ttf" id="2_vgs4q"]
+[ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="3_txth5"]
+[ext_resource type="Texture2D" uid="uid://c6uvhs7e82avw" path="res://obj/sign/sign.png" id="4_eiplj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oydqt"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+texture = ExtResource("1_oqa51")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="Animation" id="Animation_2nm0l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2amy3"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.267943, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 0.8), Vector2(0, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5nyrc"]
+resource_name = "new_animation"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeUI:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.170755, 0.5, 1),
+"update": 0,
+"values": [Vector2(1.25, 0), Vector2(0.9, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q81n6"]
+_data = {
+"RESET": SubResource("Animation_2nm0l"),
+"close": SubResource("Animation_2amy3"),
+"open": SubResource("Animation_5nyrc")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldecw"]
+radius = 16.0
+
+[node name="Sign" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_hy4m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="UpgradeUI" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_top = -5.0
+offset_right = 40.0
+offset_bottom = 35.0
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeUI"]
+custom_minimum_size = Vector2(56, 48)
+layout_mode = 0
+offset_left = -28.0
+offset_top = -57.0
+offset_right = 28.0
+offset_bottom = -9.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_oydqt")
+
+[node name="Control2" type="Control" parent="UpgradeUI/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="LeftSideScreen" type="VisibleOnScreenNotifier2D" parent="UpgradeUI/PanelContainer/Control2"]
+rect = Rect2(-2, -2, 4, 4)
+
+[node name="Control" type="Control" parent="UpgradeUI/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="RightSideScreen" type="VisibleOnScreenNotifier2D" parent="UpgradeUI/PanelContainer/Control"]
+rect = Rect2(-2, -2, 4, 4)
+
+[node name="Description" type="RichTextLabel" parent="UpgradeUI/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/line_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_vgs4q")
+theme_override_font_sizes/normal_font_size = 4
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeUI"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = -6.0
+texture = ExtResource("3_txth5")
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q81n6")
+}
+
+[node name="Sign" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("4_eiplj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ldecw")

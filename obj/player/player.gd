@@ -204,3 +204,4 @@ func _on_health_died() -> void:
 	friction = 0.0
 	knockback_gravity = 480
 	PlayerStats.player_died.emit()
+
