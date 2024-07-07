@@ -85,7 +85,8 @@ shape = SubResource("RectangleShape2D_v2h0u")
 one_way_collision = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+position = Vector2(-6, 0)
 shape = SubResource("SegmentShape2D_76p3p")
+one_way_collision = true
 
 [connection signal="died" from="Node2D/Hitbox/Health" to="." method="_on_health_died"]
