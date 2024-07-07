@@ -7,8 +7,9 @@ class_name FireBullet extends Node2D
 @export var timer: Timer
 @export var pooler: NodePooler
 
-func fire(angle: float) -> void:
+func fire(angle: float) -> Array[Bullet]:
 	if !is_instance_valid(timer) or timer.time_left == 0:
+		var bullets: Array[Bullet]
 		if is_instance_valid(timer): timer.start()
 		for i in projectile_count + 1:
 			var bullet = pooler.grab_available_object()
@@ -20,3 +21,6 @@ func fire(angle: float) -> void:
 					bullet.velocity = Vector2.from_angle(new_angle) * speed
 				else:
 					bullet.velocity = Vector2.from_angle(angle) * speed
+				bullets.append(bullet)
+		return bullets
+	return []

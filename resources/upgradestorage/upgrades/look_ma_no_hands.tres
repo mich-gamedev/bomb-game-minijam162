@@ -5,10 +5,11 @@
 [resource]
 script = ExtResource("1_nt48v")
 title = "look ma. no hands"
-description = "[neu]+[/color]15deg bomb spread"
+description = "[neu]+[/color]15 deg. bomb spread"
 player_speed = 1.0
 player_gravity = 1.0
 player_jump = 1.0
+player_slam_damage = 1.0
 bomb_gravity = 1.0
 bomb_speed = 1.0
 bomb_damage = 1.0

@@ -8,4 +8,6 @@ func _process(delta: float) -> void:
 
 func _on_bounced() -> void:
 	var inst = node_pooler.grab_available_object()
+	inst.get_node("Hurtbox").damage = Upgrades.current.bomb_damage
 	inst.global_position = global_position
+	inst.scale = Vector2.ONE * Upgrades.current.explosion_radius

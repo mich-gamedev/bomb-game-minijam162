@@ -218,6 +218,7 @@ texture = ExtResource("1_u77f4")
 
 [node name="UpgradeUI" type="Control" parent="."]
 visible = false
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -299,7 +300,7 @@ script = ExtResource("6_s5g7v")
 health = NodePath("Health")
 team = 1
 
-[node name="Health" type="Node" parent="Hitbox"]
+[node name="Health" type="Node" parent="Hitbox" groups=["upgrade spring"]]
 script = ExtResource("7_jqv3u")
 max_health = 1.0
 starting_health = 1.0
@@ -336,7 +337,7 @@ pivot_offset = Vector2(0, 168)
 color = Color(0, 0, 0, 1)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.66
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

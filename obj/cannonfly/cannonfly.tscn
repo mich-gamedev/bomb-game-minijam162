@@ -173,8 +173,9 @@ shape = SubResource("CircleShape2D_gstac")
 
 [node name="Health" type="Node" parent="Hitbox"]
 script = ExtResource("8_1jb6r")
-max_health = 2.0
-starting_health = 2.0
+max_health = 1.5
+starting_health = 1.5
+world_increment = 0.25
 
 [node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("9_arufw")

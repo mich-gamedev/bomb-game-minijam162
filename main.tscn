@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://lopds2nwpxvn"]
+[gd_scene load_steps=7 format=3 uid="uid://lopds2nwpxvn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4rwns"]
 [ext_resource type="PackedScene" uid="uid://dkyubl7e8ns6r" path="res://obj/ui/main_UI.tscn" id="5_4pxxc"]
@@ -29,6 +29,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 5.96046e-08)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CanvasLayer2/Control:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_qxlem"]
 resource_name = "open"
@@ -58,9 +70,50 @@ tracks/1/keys = {
 "values": [Vector2(1, 1), Vector2(1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_cwwp0"]
+resource_name = "end"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(0.2, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Black:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [Vector2(1, 5.96046e-08), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../CanvasLayer2/Control:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.75, 1.75)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jl0lk"]
 _data = {
 "RESET": SubResource("Animation_qwua4"),
+"end": SubResource("Animation_cwwp0"),
 "open": SubResource("Animation_qxlem")
 }
 
@@ -82,6 +135,7 @@ metadata/_edit_lock_ = true
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Control" parent="CanvasLayer2" instance=ExtResource("5_4pxxc")]
+pivot_offset = Vector2(112, 84)
 metadata/_edit_lock_ = true
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="."]

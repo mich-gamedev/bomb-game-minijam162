@@ -1,11 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvcnq857ap0ms"]
+[gd_scene load_steps=16 format=3 uid="uid://dvcnq857ap0ms"]
 
 [ext_resource type="Script" path="res://components/object pooling/anim_on_stash.gd" id="1_0l0ha"]
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="2_eult3"]
 [ext_resource type="Texture2D" uid="uid://coqsalvkoydaa" path="res://obj/player/explosion.png" id="3_k3fhe"]
+[ext_resource type="Script" path="res://obj/player/particle_randomizer.gd" id="4_8vnfw"]
+[ext_resource type="AudioStream" uid="uid://b5y27juhvp8jj" path="res://obj/player/sfx/explode/explode1.wav" id="4_amyg8"]
+[ext_resource type="AudioStream" uid="uid://br0jfopcd5r6" path="res://obj/player/sfx/explode/explode2.wav" id="5_psdp1"]
+[ext_resource type="AudioStream" uid="uid://bpxc63q82acdh" path="res://obj/player/sfx/explode/explode3.wav" id="6_yptc4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av2ai"]
 radius = 12.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e86r6"]
+random_pitch = 1.2
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("4_amyg8")
+stream_0/weight = 1.5
+stream_1/stream = ExtResource("5_psdp1")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_yptc4")
+stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_0q8ly"]
 length = 0.001
@@ -33,10 +48,33 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ifth4"]
 resource_name = "explode"
-length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,12 +100,72 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, 3.14159]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GPUParticles2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1c7q3"]
 _data = {
 "RESET": SubResource("Animation_0q8ly"),
 "explode": SubResource("Animation_ifth4")
 }
+
+[sub_resource type="Curve" id="Curve_hp1bj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.50165, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.61733, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7j5iw"]
+curve = SubResource("Curve_hp1bj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q036m"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+initial_velocity_max = 64.0
+gravity = Vector3(0, 160, 0)
+scale_min = 2.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_7j5iw")
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.5
 
 [node name="PooledItem2D" type="Node2D" node_paths=PackedStringArray("anim")]
 script = ExtResource("1_0l0ha")
@@ -84,7 +182,21 @@ texture = ExtResource("3_k3fhe")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_av2ai")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Hurtbox"]
+stream = SubResource("AudioStreamRandomizer_e86r6")
+volume_db = 8.0
+pitch_scale = 1.3
+max_distance = 480.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hurtbox"]
 libraries = {
 "": SubResource("AnimationLibrary_1c7q3")
 }
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(0.901235, 0.901235)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_q036m")
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("4_8vnfw")

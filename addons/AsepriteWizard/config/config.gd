@@ -201,7 +201,7 @@ func initialize_project_settings():
 
 	_initialize_project_cfg(_EXPORTER_ENABLE_KEY, true, TYPE_BOOL)
 
-	# TODO remove (history max entries)
+	#remove (history max entries)
 	#_initialize_project_cfg(_HISTORY_CONFIG_FILE_CFG_KEY, _DEFAULT_HISTORY_CONFIG_FILE_PATH, TYPE_STRING, PROPERTY_HINT_GLOBAL_FILE)
 	_initialize_project_cfg(_HISTORY_MAX_ENTRIES, _HISTORY_DEFAULT_MAX_ENTRIES, TYPE_INT)
 

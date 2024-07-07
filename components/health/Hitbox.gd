@@ -5,4 +5,5 @@ class_name Hitbox
 @export var team: Health.Team
 @export var is_boss: bool = false
 
+
 signal hurtbox_entered(hurtbox: Hurtbox)

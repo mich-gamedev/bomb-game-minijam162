@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://b24dupg7o6oqv"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_07rsu"]
+
+[resource]
+script = ExtResource("1_07rsu")
+title = "lead"
+description = "[pos]+[/color]15% bomb damage"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+player_slam_damage = 1.0
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.15
+bomb_spread = 0
+explosion_radius = 1.0
+bomb_count = 0

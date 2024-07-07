@@ -10,11 +10,12 @@ scene = ExtResource("1_f24fb")
 floating = true
 
 [sub_resource type="Curve" id="Curve_ftemy"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
-point_count = 1
+max_value = 4.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253968, 0), 0.0, 0.0, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [resource]
 script = ExtResource("1_fequ4")
 data = SubResource("Resource_l1mng")
-world_max = 20
+world_max = 16
 spawn_rate = SubResource("Curve_ftemy")

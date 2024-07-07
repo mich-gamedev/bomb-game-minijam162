@@ -10,19 +10,13 @@ extends CharacterBody2D
 
 
 func _ready() -> void:
-	velocity.x = speed * [-1,1].pick_random()
+	node_pooler.default_parent = get_tree().current_scene.inst
 	sprite.flip_h = velocity.x < 0
 
 func _physics_process(delta: float) -> void:
-	velocity.y = move_toward(velocity.y, terminal_velocity, gravity * delta)
-	if velocity.y < 0: velocity.y = 0
-	if left_raycast.is_colliding():
-		velocity.x = speed
-		sprite.flip_h = false
-	if right_raycast.is_colliding():
-		velocity.x = -speed
-		sprite.flip_h = true
-	move_and_slide()
+	sprite.flip_h = velocity.x < 0
+	if is_on_floor(): sprite.play(&"walk")
+	else: sprite.play(&"fall")
 
 func _on_health_died() -> void:
 	var inst = node_pooler.grab_available_object()

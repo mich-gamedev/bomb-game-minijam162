@@ -99,6 +99,7 @@ shape = SubResource("RectangleShape2D_57gjb")
 script = ExtResource("4_f15i3")
 max_health = 1.0
 starting_health = 1.0
+world_increment = 0.25
 
 [node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("5_ha0yx")

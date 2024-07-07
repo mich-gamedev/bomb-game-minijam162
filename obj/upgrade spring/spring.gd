@@ -22,17 +22,20 @@ func _ready() -> void:
 	visible = false
 
 func _physics_process(delta: float) -> void:
-	spring_coll.disabled = !visible
+	spring_coll.disabled = timer.time_left or !(visible)
 	if !left_side_screen.is_on_screen(): panel_container.position.x += 8
 	if !right_side_screen.is_on_screen(): panel_container.position.x -= 8
 
 func _on_world_ended() -> void:
 	visible = true
-	timer.start()
+	if get_overlapping_bodies().any(func(a: Node): return a.is_in_group(&"player")):
+		anim.play(&"open")
+		timer.start()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(&"player") and visible:
 		anim.play(&"open")
+		timer.start()
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -41,7 +44,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _on_hitbox_hurtbox_entered(hurtbox: Hurtbox) -> void:
-	if visible:
+	if visible and !timer.time_left:
 		visible = false
 		Upgrades.add_upgrade(upgrade)
 		trans.play(&"close")

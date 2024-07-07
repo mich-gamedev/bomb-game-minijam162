@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemySpawnRate" load_steps=6 format=3 uid="uid://b0nq6r1rwd17s"]
+
+[ext_resource type="Script" path="res://resources/spawnrates/spawnrate.gd" id="1_6rxxl"]
+[ext_resource type="PackedScene" uid="uid://c7px8ecf6whr" path="res://obj/cacturtle/cacturtle.tscn" id="1_8kuyt"]
+[ext_resource type="Script" path="res://resources/spawnrates/enemy_info.gd" id="2_dwe1a"]
+
+[sub_resource type="Resource" id="Resource_sjwfg"]
+script = ExtResource("2_dwe1a")
+scene = ExtResource("1_8kuyt")
+floating = false
+
+[sub_resource type="Curve" id="Curve_3mesi"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.248322, 0), 0.0, 0.0, 0, 0, Vector2(0.494709, 1.44286), 0.0, 0.0, 0, 0, Vector2(1, 0.991837), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[resource]
+script = ExtResource("1_6rxxl")
+data = SubResource("Resource_sjwfg")
+world_max = 12
+spawn_rate = SubResource("Curve_3mesi")

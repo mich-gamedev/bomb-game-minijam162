@@ -6,6 +6,7 @@ var world: int = 0
 var wave: int = 0
 var spawners = 0
 
+
 @onready var node_pooler: NodePooler = $NodePooler
 
 var wave_started: bool = false
@@ -16,6 +17,7 @@ const spawn_rates: Array[EnemySpawnRate] = [
 	preload("res://resources/spawnrates/longlegs.tres"),
 	preload("res://resources/spawnrates/firefly.tres"),
 	preload("res://resources/spawnrates/cannon_fly.tres"),
+	preload("res://resources/spawnrates/cacturtle.tres"),
 ] ## will affect spawnable_enemies's list based on the samples from the spawn curves
 
 signal wave_just_started
@@ -60,7 +62,9 @@ func _process(delta: float) -> void:
 func cycle_spawn_rates() -> void:
 	spawnable_enemies.clear()
 	for spawn: EnemySpawnRate in spawn_rates:
-		for i in spawn.spawn_rate.sample(float(world) / float(spawn.world_max)):
+		var sample = int(spawn.spawn_rate.sample_baked(float(world) / float(spawn.world_max)))
+		print("%s, at %d worlds, at %f x, exists %f times" % [spawn.data.resource_path, world, float(world) / float(spawn.world_max), sample])
+		if sample: for i in sample:
 			spawnable_enemies.append(spawn.data)
 
 

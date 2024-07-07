@@ -5,11 +5,12 @@
 [resource]
 script = ExtResource("1_xqgjf")
 title = "athlete"
-description = "[neu]+[/color]10% speed
+description = "[neu]+[/color]5% speed
 [pos]+[/color]10% jump height"
-player_speed = 1.1
+player_speed = 1.05
 player_gravity = 1.0
 player_jump = 1.1
+player_slam_damage = 1.0
 bomb_gravity = 1.0
 bomb_speed = 1.0
 bomb_damage = 1.0

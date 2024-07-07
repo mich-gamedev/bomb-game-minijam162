@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://obj/ui/wave_label.gd" id="5_8cf76"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_msix2"]
+line_spacing = -1.0
 font = ExtResource("4_v4uj1")
 font_size = 8
 outline_size = 3
@@ -60,6 +61,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="WorldLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 43.0
+offset_bottom = 19.0
+text = "WORLD:   0
+HIGH SCORE:   0"
+label_settings = SubResource("LabelSettings_msix2")
+
+[node name="HP" type="TextureRect" parent="." groups=["Health"]]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 29.0
+offset_bottom = 10.0
+pivot_offset = Vector2(0, 4)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_e8k3n")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -106,21 +132,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 0
-
-[node name="HP" type="TextureRect" parent="MarginContainer/Control/VBoxContainer" groups=["Health"]]
-custom_minimum_size = Vector2(27, 8)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("2_e8k3n")
-expand_mode = 1
-stretch_mode = 1
-
-[node name="WorldLabel" type="Label" parent="MarginContainer/Control/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "W-0"
-label_settings = SubResource("LabelSettings_msix2")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

@@ -187,7 +187,7 @@ func _cleanup_animations(target_node: Node, player: AnimationPlayer, content: Di
 
 
 func _remove_unused_animations(content: Dictionary, player: AnimationPlayer):
-	pass # FIXME it's not removing unused animations anymore. Sample impl bellow
+	pass # it's not removing unused animations anymore. Sample impl bellow
 #	var tags = ["RESET"]
 #	for t in content.meta.frameTags:
 #		var a = t.name

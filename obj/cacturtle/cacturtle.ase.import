@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://xd04ottgau4y"
+path="res://.godot/imported/cacturtle.ase-7b783318dab91c7f35d0d036aa0c346b.res"
+
+[deps]
+
+source_file="res://obj/cacturtle/cacturtle.ase"
+dest_files=["res://.godot/imported/cacturtle.ase-7b783318dab91c7f35d0d036aa0c346b.res"]
+
+[params]
+

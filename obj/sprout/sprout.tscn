@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b8iuxvju8vwjo"]
+[gd_scene load_steps=21 format=3 uid="uid://b8iuxvju8vwjo"]
 
 [ext_resource type="Texture2D" uid="uid://cp6m6v2sbf46w" path="res://obj/sprout/sprout.png" id="1_acmkg"]
 [ext_resource type="Script" path="res://obj/sprout/sprout.gd" id="1_g5lys"]
@@ -8,40 +8,60 @@
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_tbowg"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="7_8orc2"]
 [ext_resource type="PackedScene" uid="uid://7pqj5hj74nqq" path="res://obj/dirt/dirt_pooled.tscn" id="8_uma1i"]
+[ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="9_we61f"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v38dh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_se0td"]
 atlas = ExtResource("1_acmkg")
-region = Rect2(0, 0, 12, 12)
+region = Rect2(16, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vfmw2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewqe3"]
 atlas = ExtResource("1_acmkg")
-region = Rect2(12, 0, 12, 12)
+region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tt0eq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2btux"]
 atlas = ExtResource("1_acmkg")
-region = Rect2(0, 12, 12, 12)
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ts86e"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1x0y"]
 atlas = ExtResource("1_acmkg")
-region = Rect2(12, 12, 12, 12)
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kjrn6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sl17"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2apip"]
+atlas = ExtResource("1_acmkg")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_elwr5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v38dh")
+"texture": SubResource("AtlasTexture_se0td")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vfmw2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tt0eq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ts86e")
+"texture": SubResource("AtlasTexture_ewqe3")
 }],
 "loop": true,
-"name": &"default",
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2btux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1x0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sl17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2apip")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 10.0
 }]
 
@@ -62,14 +82,25 @@ collision_layer = 130
 collision_mask = 133
 script = ExtResource("1_g5lys")
 speed = 32.0
-gravity = 960.0
+gravity = 640.0
+terminal_velocity = 256.0
+
+[node name="WalkAndBump" type="Node" parent="." node_paths=PackedStringArray("actor", "left_ray", "right_ray")]
+script = ExtResource("9_we61f")
+actor = NodePath("..")
+left_ray = NodePath("../LeftRaycast")
+right_ray = NodePath("../RightRaycast")
+speed = 32.0
+gravity = 640.0
 terminal_velocity = 256.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_kjrn6")
-autoplay = "default"
-offset = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_elwr5")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.546304
+offset = Vector2(0, -8)
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -79,7 +110,7 @@ metadata/_aseprite_wizard_config_ = {
 "slice": "",
 "source": "res://obj/sprout/sprout.ase"
 }
-metadata/_aseprite_wizard_source_file_hash_ = "b35a7c6a6854285d69479d8480f3b90d"
+metadata/_aseprite_wizard_source_file_hash_ = "db7012b2eb9fe40eaf122d2eb5a81b51"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2.5)
@@ -94,8 +125,9 @@ team = 1
 
 [node name="Health" type="Node" parent="JumpHitbox"]
 script = ExtResource("3_lbhdm")
-max_health = 1.0
-starting_health = 1.0
+max_health = 0.3
+starting_health = 0.3
+world_increment = 0.1
 
 [node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("5_tbowg")

@@ -5,6 +5,7 @@ class_name Health
 @export var max_health: float
 @export var starting_health: float
 @export var invincibility_time: float = 0.05
+@export var world_increment: float = 0.0
 
 @onready var health := clampf(starting_health, 0.0, max_health)
 var can_harm := true
@@ -16,10 +17,16 @@ signal harmed(amount: float)
 signal died
 
 enum Team {PLAYER, ENEMY}
+
+func _ready() -> void:
+	if world_increment:
+		max_health += world_increment * EnemySpawner.world
+		health = max_health
+
 func harm(amount: float) -> float:
 	if can_harm:
-		harmed.emit(amount)
 		health -= amount
+		harmed.emit(amount)
 		if health <= 0:
 			died.emit()
 		can_harm = false

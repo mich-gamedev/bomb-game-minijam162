@@ -58,8 +58,9 @@ team = 1
 
 [node name="Health" type="Node" parent="Node2D/Hitbox"]
 script = ExtResource("6_1sn1o")
-max_health = 4.0
-starting_health = 4.0
+max_health = 1.0
+starting_health = 1.0
+world_increment = 0.5
 
 [node name="FreeOnDeath" type="Node" parent="Node2D/Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("7_o8f6n")

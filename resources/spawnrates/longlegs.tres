@@ -10,11 +10,12 @@ scene = ExtResource("1_hvpfd")
 floating = false
 
 [sub_resource type="Curve" id="Curve_knfx3"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.5, 0.0019685), 0.0, 0.0, 0, 0, Vector2(0.746032, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.991837), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [resource]
 script = ExtResource("1_who22")
 data = SubResource("Resource_ajt7w")
-world_max = 20
+world_max = 12
 spawn_rate = SubResource("Curve_knfx3")
