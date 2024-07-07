@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvrv6sg4y4bca"]
+[gd_scene load_steps=3 format=3 uid="uid://d0mnqghuytg5x"]
 
 [ext_resource type="Texture2D" uid="uid://5lqh4j7p77xb" path="res://obj/sprout/death.png" id="1_ak01n"]
 [ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_segd3"]

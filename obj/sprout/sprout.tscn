@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b8iuxvju8vwjo"]
+[gd_scene load_steps=22 format=3 uid="uid://b8iuxvju8vwjo"]
 
 [ext_resource type="Texture2D" uid="uid://cp6m6v2sbf46w" path="res://obj/sprout/sprout.png" id="1_acmkg"]
 [ext_resource type="Script" path="res://obj/sprout/sprout.gd" id="1_g5lys"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="5_hbx86"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_tbowg"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="7_8orc2"]
+[ext_resource type="PackedScene" uid="uid://d0mnqghuytg5x" path="res://obj/sprout/dead_sprout.tscn" id="8_id07y"]
 [ext_resource type="PackedScene" uid="uid://7pqj5hj74nqq" path="res://obj/dirt/dirt_pooled.tscn" id="8_uma1i"]
 [ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="9_we61f"]
 
@@ -129,10 +130,17 @@ max_health = 0.3
 starting_health = 0.3
 world_increment = 0.1
 
-[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor")]
+[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor", "particle_pooler")]
 script = ExtResource("5_tbowg")
 health = NodePath("..")
 actor = NodePath("../../..")
+particle_pooler = NodePath("NodePooler")
+
+[node name="NodePooler" type="Node" parent="JumpHitbox/Health/FreeOnDeath"]
+script = ExtResource("7_8orc2")
+pool_name = &"sprout_death"
+pool_scene = ExtResource("8_id07y")
+default_count = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
 position = Vector2(0, -6)

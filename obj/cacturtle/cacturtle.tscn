@@ -1,10 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7px8ecf6whr"]
+[gd_scene load_steps=18 format=3 uid="uid://c7px8ecf6whr"]
 
+[ext_resource type="Script" path="res://obj/cacturtle/cacturtle.gd" id="1_ckffk"]
 [ext_resource type="Texture2D" uid="uid://c0sj1hwtv4yw0" path="res://obj/cacturtle/cacturtle.png" id="1_ssfyc"]
 [ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="2_1ieq4"]
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="3_2daob"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="4_tsapm"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="5_alcd0"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="6_ur2v8"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="8_xmiid"]
+[ext_resource type="PackedScene" uid="uid://5a1c1vyt71tx" path="res://obj/cacturtle/dead_cacturtle.tscn" id="9_bllpv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fncjw"]
 atlas = ExtResource("1_ssfyc")
@@ -53,6 +57,7 @@ height = 18.0
 size = Vector2(14, 20)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_ckffk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -82,12 +87,12 @@ gravity = 960.0
 terminal_velocity = 256.0
 
 [node name="LeftRay" type="RayCast2D" parent="."]
-position = Vector2(0, -8)
-target_position = Vector2(-8, 0)
+position = Vector2(-3, -16)
+target_position = Vector2(-7, 14)
 
 [node name="RightRay" type="RayCast2D" parent="."]
-position = Vector2(0, -8)
-target_position = Vector2(8, 0)
+position = Vector2(3, -16)
+target_position = Vector2(7, 14)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7.5)
@@ -112,8 +117,18 @@ max_health = 2.5
 starting_health = 2.5
 world_increment = 0.5
 
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor", "particle_pooler")]
+script = ExtResource("6_ur2v8")
+health = NodePath("..")
+actor = NodePath("../../..")
+particle_pooler = NodePath("NodePooler")
+
+[node name="NodePooler" type="Node" parent="Hitbox/Health/FreeOnDeath"]
+script = ExtResource("8_xmiid")
+pool_name = &"cacturtle"
+pool_scene = ExtResource("9_bllpv")
+default_count = 1
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_kex2o")
-
-[connection signal="died" from="Hitbox/Health" to="WalkAndBump" method="_on_health_died"]

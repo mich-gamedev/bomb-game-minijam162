@@ -20,9 +20,6 @@ func _physics_process(delta: float) -> void:
 	else: sprite.play(&"fall")
 
 func _on_health_died() -> void:
-	var body_inst = dead_body.instantiate()
-	body_inst.global_position = global_position
-	get_parent().add_child(body_inst)
 	var inst = node_pooler.grab_available_object()
 	inst.global_position = ((global_position/8.0).round() * 8.0) - Vector2(4,4)
 

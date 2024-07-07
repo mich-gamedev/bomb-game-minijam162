@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch1x3xxixwwgg"]
+[gd_scene load_steps=9 format=3 uid="uid://ch1x3xxixwwgg"]
 
 [ext_resource type="TileSet" uid="uid://dcpj66e46i12q" path="res://resources/tileset/ground1/ground1.tres" id="1_wr2il"]
 [ext_resource type="Script" path="res://components/misc/floorwrap.gd" id="2_52nuk"]
 [ext_resource type="Texture2D" uid="uid://ct7t52vt1gu5x" path="res://components/misc/down.png" id="3_r2imm"]
+[ext_resource type="PackedScene" uid="uid://cpib3ohf10c14" path="res://obj/player/player.tscn" id="4_0858f"]
 
 [sub_resource type="Curve" id="Curve_glmd0"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.228682, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.88529, 0.0, 0, 0]
@@ -46,9 +47,5 @@ lifetime = 1.5
 position = Vector2(112, 176)
 shape = SubResource("RectangleShape2D_e80b5")
 
-[connection signal="body_entered" from="TileMap/@Area2D@213998" to="TileMap/@Area2D@213998" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@213998" to="TileMap/@Area2D@213998" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMap/@Area2D@214000" to="TileMap/@Area2D@214000" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@214000" to="TileMap/@Area2D@214000" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMap/@Area2D@214013" to="TileMap/@Area2D@214013" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@214013" to="TileMap/@Area2D@214013" method="_on_body_exited"]
+[node name="Player" parent="." instance=ExtResource("4_0858f")]
+position = Vector2(96, 88)
