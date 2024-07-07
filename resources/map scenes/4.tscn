@@ -17,7 +17,7 @@ _data = {
 }
 point_count = 2
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_m58d4")]
 position = Vector2(110, 86)
@@ -41,10 +41,3 @@ position = Vector2(-52, 70)
 curve = SubResource("Curve2D_jhbo5")
 point_0_angle = 1.5708
 point_1_angle = 3.14159
-
-[connection signal="body_entered" from="TileMap/@Area2D@143189" to="TileMap/@Area2D@143189" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@143189" to="TileMap/@Area2D@143189" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMap/@Area2D@143202" to="TileMap/@Area2D@143202" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@143202" to="TileMap/@Area2D@143202" method="_on_body_exited"]
-[connection signal="body_entered" from="TileMap/@Area2D@144304" to="TileMap/@Area2D@144304" method="_on_body_entered"]
-[connection signal="body_exited" from="TileMap/@Area2D@144304" to="TileMap/@Area2D@144304" method="_on_body_exited"]
