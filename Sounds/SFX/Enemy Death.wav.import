@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7jyd2f6evkhx"
+path="res://.godot/imported/Enemy Death.wav-5814f9f0fefdc65dad62e16cfa048aea.sample"
+
+[deps]
+
+source_file="res://Sounds/SFX/Enemy Death.wav"
+dest_files=["res://.godot/imported/Enemy Death.wav-5814f9f0fefdc65dad62e16cfa048aea.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

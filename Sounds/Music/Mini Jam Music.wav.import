@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnhx4v5suggvg"
+path="res://.godot/imported/Mini Jam Music.wav-a99e449e111eedf80fad34508d826ed3.sample"
+
+[deps]
+
+source_file="res://Sounds/Music/Mini Jam Music.wav"
+dest_files=["res://.godot/imported/Mini Jam Music.wav-a99e449e111eedf80fad34508d826ed3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
