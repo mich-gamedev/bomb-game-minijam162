@@ -11,6 +11,7 @@ extends Area2D
 @onready var left_side_screen: VisibleOnScreenNotifier2D = $UpgradeUI/PanelContainer/Control2/LeftSideScreen
 @onready var right_side_screen: VisibleOnScreenNotifier2D = $UpgradeUI/PanelContainer/Control/RightSideScreen
 @onready var panel_container: PanelContainer = $UpgradeUI/PanelContainer
+@onready var node_pooler: NodePooler = $NodePooler
 
 var upgrade: UpgradePurchase
 @export var always_active: bool = false
@@ -30,6 +31,8 @@ func _physics_process(delta: float) -> void:
 	if !right_side_screen.is_on_screen(): panel_container.position.x -= 8
 
 func _on_world_ended() -> void:
+	var inst = node_pooler.grab_available_object()
+	inst.global_position = global_position
 	visible = true
 	if get_overlapping_bodies().any(func(a: Node): return a.is_in_group(&"player")):
 		anim.play(&"open")

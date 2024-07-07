@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gwm5y6p0x7aj"]
+[gd_scene load_steps=22 format=3 uid="uid://gwm5y6p0x7aj"]
 
 [ext_resource type="Script" path="res://obj/upgrade spring/spring.gd" id="1_5x0jf"]
 [ext_resource type="Texture2D" uid="uid://c0aqlc6ecaok2" path="res://obj/upgrade spring/spring.png" id="1_u77f4"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="5_hw5hh"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="6_s5g7v"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="7_jqv3u"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="8_ept5j"]
+[ext_resource type="PackedScene" uid="uid://dvcnq857ap0ms" path="res://obj/player/explosion.tscn" id="9_qxugv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6qdx"]
 radius = 32.0
@@ -339,6 +341,12 @@ color = Color(0, 0, 0, 1)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.66
 one_shot = true
+
+[node name="NodePooler" type="Node" parent="."]
+script = ExtResource("8_ept5j")
+pool_name = &"bomb_explosion"
+pool_scene = ExtResource("9_qxugv")
+default_count = 3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

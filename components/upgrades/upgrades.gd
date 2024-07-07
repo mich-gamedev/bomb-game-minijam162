@@ -21,6 +21,8 @@ const possible_upgrades: Array[UpgradeStorage] = [
 ]
 
 func reset() -> void:
+	print("resetting upgrades")
+	bought_upgrades.clear()
 	current = UpgradeStorage.new()
 
 func add_upgrade(upgrade: UpgradeStorage) -> void:

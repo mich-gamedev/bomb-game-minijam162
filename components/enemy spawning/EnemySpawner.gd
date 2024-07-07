@@ -25,6 +25,7 @@ signal enemy_just_spawned(enemy: Node)
 signal world_ended
 
 func reset() -> void:
+	print("resetting enemy spawner")
 	world = 0
 	wave = 0
 	enemy_count = 5
