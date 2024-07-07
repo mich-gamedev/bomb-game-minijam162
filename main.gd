@@ -38,4 +38,5 @@ func _on_player_died() -> void:
 	await animation_player.animation_finished
 	inst.queue_free()
 	tutorial()
-	#TODO: send user to main menu on death
+	animation_player.play(&"open")
+	await animation_player.animation_finished
