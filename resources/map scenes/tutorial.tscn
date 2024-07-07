@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://du0d1tgva85"]
+[gd_scene load_steps=25 format=3 uid="uid://du0d1tgva85"]
 
 [ext_resource type="Script" path="res://resources/map scenes/tutorial.gd" id="1_bkn5x"]
 [ext_resource type="TileSet" uid="uid://dcpj66e46i12q" path="res://resources/tileset/ground1/ground1.tres" id="1_e8mfk"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://mypvd82m2xb0" path="res://obj/main menu/logo2.png" id="9_nwhnd"]
 [ext_resource type="Script" path="res://resources/map scenes/GPUParticles2D.gd" id="10_ufhaw"]
 [ext_resource type="PackedScene" uid="uid://dxlsklbl1m1ha" path="res://obj/pipe/pipe_teleporter.tscn" id="13_qut4b"]
-[ext_resource type="PackedScene" uid="uid://c5vvlnxbm0q4c" path="res://obj/cannonfly/cannonfly.tscn" id="14_btutx"]
 
 [sub_resource type="Gradient" id="Gradient_l7car"]
 colors = PackedColorArray(0.627451, 0.635294, 0.619608, 1, 1, 1, 1, 1)
@@ -262,9 +261,6 @@ fit_content = true
 position = Vector2(240, 88)
 curve = SubResource("Curve2D_xptkt")
 point_0_angle = 3.14159
-
-[node name="CannonFly" parent="." instance=ExtResource("14_btutx")]
-position = Vector2(149, 136)
 
 [connection signal="finished" from="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D" to="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D" method="_on_finished"]
 [connection signal="finished" from="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D2" to="CanvasLayer/MarginContainer/CenterContainer/TextureRect2/GPUParticles2D2" method="_on_finished"]
