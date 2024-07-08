@@ -5,11 +5,12 @@
 [resource]
 script = ExtResource("1_07rsu")
 title = "lead"
-description = "[pos]+[/color]15% bomb damage"
+description = "[pos]+[/color]25% bomb damage"
 player_speed = 1.0
 player_gravity = 1.0
 player_jump = 1.0
 player_slam_damage = 1.0
+invincibility_time = 1.0
 bomb_gravity = 1.0
 bomb_speed = 1.0
 bomb_damage = 1.15

@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 func _area_1_body_entered(body: Node2D) -> void:
 	if (body.is_in_group(&"player") or body.is_in_group(&"enemy") or body is Bullet) and !(body in ignore):
 		body.set_deferred("global_position", area_2.global_position)
+		$Area2D/Enter.play()
+		$Area2D/In.restart()
+		$Area2D2/Out.restart()
 		ignore.append(body)
 		if body.is_in_group(&"player"):
 			body.health.can_harm = false
@@ -48,12 +51,13 @@ func _area_1_body_entered(body: Node2D) -> void:
 		if body.is_in_group(&"player"):
 			body.health.can_harm = true
 		ignore.erase(body)
-		$Area2D/Enter.play()
 
 func _area_2_body_entered(body: Node2D) -> void:
 	if (body.is_in_group(&"player") or body.is_in_group(&"enemy")) and !(body in ignore):
 		body.set_deferred("global_position", area_1.global_position)
 		$Area2D2/Enter.play()
+		$Area2D2/In.restart()
+		$Area2D/Out.restart()
 		ignore.append(body)
 		if body.is_in_group(&"player"):
 			body.health.can_harm = false
@@ -64,3 +68,4 @@ func _area_2_body_entered(body: Node2D) -> void:
 		if body.is_in_group(&"player"):
 			body.health.can_harm = true
 		ignore.erase(body)
+
