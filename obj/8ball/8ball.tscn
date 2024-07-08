@@ -1,0 +1,163 @@
+[gd_scene load_steps=22 format=3 uid="uid://baqd5vujajp4m"]
+
+[ext_resource type="Texture2D" uid="uid://deibpk01xk3al" path="res://obj/8ball/8ball.png" id="1_cejib"]
+[ext_resource type="Script" path="res://obj/8ball/8ball.gd" id="1_v3mhe"]
+[ext_resource type="Script" path="res://components/movement/CollideAndBounce.gd" id="3_xfhp1"]
+[ext_resource type="AudioStream" uid="uid://drvl5gxi6k7yt" path="res://obj/8ball/roll.mp3" id="4_74mg0"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="5_o3j4u"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="6_d725h"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="7_gd0bv"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="7_ml2gw"]
+
+[sub_resource type="Curve" id="Curve_fptm2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.42883, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6v63p"]
+curve = SubResource("Curve_fptm2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5j7o1"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+radial_velocity_max = 8.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_6v63p")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qo86"]
+atlas = ExtResource("1_cejib")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psn53"]
+atlas = ExtResource("1_cejib")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_likm6"]
+atlas = ExtResource("1_cejib")
+region = Rect2(24, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2cf0"]
+atlas = ExtResource("1_cejib")
+region = Rect2(0, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqa42"]
+atlas = ExtResource("1_cejib")
+region = Rect2(12, 12, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4seoj"]
+atlas = ExtResource("1_cejib")
+region = Rect2(24, 12, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1evii"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qo86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psn53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_likm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2cf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqa42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4seoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qo86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qo86")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4fx7"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrkj8"]
+size = Vector2(10, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tayrk"]
+size = Vector2(8, 4)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_v3mhe")
+speed = 48.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_5j7o1")
+lifetime = 1.5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_1evii")
+autoplay = "default"
+frame_progress = 0.0558946
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/8ball/8ball.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b1229b65079ffca4b1cc980c2be52f3f"
+
+[node name="CollideAndBounce" type="Node" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_xfhp1")
+body = NodePath("..")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_74mg0")
+volume_db = 5.0
+autoplay = true
+max_distance = 480.0
+attenuation = 4.75683
+bus = &"Audio"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m4fx7")
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("5_o3j4u")
+health = NodePath("Health")
+team = 1
+
+[node name="Health" type="Node" parent="Hitbox"]
+script = ExtResource("6_d725h")
+max_health = 1.0
+starting_health = 1.0
+world_increment = 0.5
+
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+script = ExtResource("7_gd0bv")
+health = NodePath("..")
+actor = NodePath("../../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_xrkj8")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("7_ml2gw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_tayrk")

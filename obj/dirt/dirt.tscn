@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2vij8baleh0h"]
+[gd_scene load_steps=9 format=3 uid="uid://b2vij8baleh0h"]
 
 [ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="1_67byu"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_ios2o"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="3_gc1dh"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="4_qd01g"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="5_epfxg"]
+[ext_resource type="PackedScene" uid="uid://cqn4tqwh31lh4" path="res://obj/dirt/dirt_sfx.tscn" id="6_6xc1k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmqt"]
 size = Vector2(8, 8)
@@ -32,10 +34,17 @@ script = ExtResource("3_gc1dh")
 max_health = 0.5
 starting_health = 0.5
 
-[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor")]
+[node name="FreeOnDeath" type="Node" parent="Hitbox/Health" node_paths=PackedStringArray("health", "actor", "particle_pooler")]
 script = ExtResource("4_qd01g")
 health = NodePath("..")
 actor = NodePath("../../..")
+particle_pooler = NodePath("NodePooler")
+
+[node name="NodePooler" type="Node" parent="Hitbox/Health/FreeOnDeath"]
+script = ExtResource("5_epfxg")
+pool_name = &"dirt_sfx"
+pool_scene = ExtResource("6_6xc1k")
+default_count = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 visible = false

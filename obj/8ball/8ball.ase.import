@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccbgfyvo4r5qx"
+path="res://.godot/imported/8ball.ase-aa659d7102429ac107d8bba6ee316870.res"
+
+[deps]
+
+source_file="res://obj/8ball/8ball.ase"
+dest_files=["res://.godot/imported/8ball.ase-aa659d7102429ac107d8bba6ee316870.res"]
+
+[params]
+

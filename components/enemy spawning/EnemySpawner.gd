@@ -1,7 +1,7 @@
 extends Node
 
 var active: bool = false
-var enemy_count: int = 5
+var enemy_count: int = 3
 var world: int = 0
 var wave: int = 0
 var spawners = 0
@@ -18,6 +18,7 @@ const spawn_rates: Array[EnemySpawnRate] = [
 	preload("res://resources/spawnrates/firefly.tres"),
 	preload("res://resources/spawnrates/cannon_fly.tres"),
 	preload("res://resources/spawnrates/cacturtle.tres"),
+	preload("res://resources/spawnrates/8ball.tres")
 ] ## will affect spawnable_enemies's list based on the samples from the spawn curves
 
 signal wave_just_started
@@ -28,18 +29,24 @@ func reset() -> void:
 	print("resetting enemy spawner")
 	world = 0
 	wave = 0
-	enemy_count = 5
+	enemy_count = 3
 func _process(delta: float) -> void:
 	if !active: return
 	var enemies = get_tree().get_nodes_in_group("enemy")
-	if enemies.is_empty() and wave_started == false and spawners == 0:
+	if enemies.is_empty() and wave_started == false and spawners <= 0:
+		spawners = 0
+		print("spawning enemies!")
 		wave_started = true
 		wave += 1
 		wave_just_started.emit()
 		if wave >= 4:
-			enemy_count += 1
+			MusicManager.transition(&"Battle", &"Upgrade", 1.0)
+			enemy_count += randf_range(0,1)
 			world_ended.emit()
 			world += 1
+			if EnemySpawner.world > (Settings.save as SaveData).high_score:
+				(Settings.save as SaveData).high_score = EnemySpawner.world
+				Settings.save_file()
 			return
 		await get_tree().create_timer(1.0).timeout
 		print("spawning %d enemies!" % enemy_count)

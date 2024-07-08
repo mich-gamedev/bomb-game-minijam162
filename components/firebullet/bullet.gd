@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 				var part= particles.instantiate()
 				part.global_position = global_position
 				get_parent().add_child(part)
-				part.emitting = true
+				part.restart()
 			if !is_instance_valid(pooler):
 				queue_free()
 			else:

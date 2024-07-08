@@ -48,10 +48,12 @@ func _area_1_body_entered(body: Node2D) -> void:
 		if body.is_in_group(&"player"):
 			body.health.can_harm = true
 		ignore.erase(body)
+		$Area2D/Enter.play()
 
 func _area_2_body_entered(body: Node2D) -> void:
 	if (body.is_in_group(&"player") or body.is_in_group(&"enemy")) and !(body in ignore):
 		body.set_deferred("global_position", area_1.global_position)
+		$Area2D2/Enter.play()
 		ignore.append(body)
 		if body.is_in_group(&"player"):
 			body.health.can_harm = false

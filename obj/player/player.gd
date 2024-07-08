@@ -28,6 +28,10 @@ extends CharacterBody2D
 @onready var walk_sfx: AnimationPlayer = $WalkSFX
 @onready var land_stream: AudioStreamPlayer2D = $LandStream
 @onready var slam_stream: AudioStreamPlayer2D = $SlamStream
+@onready var spring_stream: AudioStreamPlayer2D = $SpringStream
+@onready var death_stream: AudioStreamPlayer2D = $DeathStream
+@onready var sparkle_stream: AudioStreamPlayer2D = $SparkleStream
+@onready var hit_stream: AudioStreamPlayer2D = $HitStream
 
 var hp: TextureRect
 
@@ -51,6 +55,7 @@ func _ready():
 	terminal_velocity *= Upgrades.current.player_gravity
 	jump_gravity *= Upgrades.current.player_gravity
 	fall_gravity *= Upgrades.current.player_gravity
+	health.invincibility_time = Upgrades.current.invincibility_time
 	hp = get_tree().get_nodes_in_group("Health")[0] # healthbar
 	health.health = PlayerStats.player_health
 	hp.size.x = health.health * 9
@@ -143,13 +148,16 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
+	if velocity.y < 0: return
 	slam_stream.play()
 	jump_combo += 1
 	label.text = "%dx" % jump_combo
 	label.global_position = global_position + Vector2(2,3)
 	velocity.y = -jump_speed * Upgrades.current.player_jump
 	knocked_back = false
-	if hitbox.is_in_group(&"end_spring") and !(hitbox.owner.timer.time_left):
+	if hitbox.is_in_group(&"end_spring") and !(hitbox.owner.timer.time_left) and !hitbox.owner.settings and !hitbox.owner.exit:
+		spring_stream.play()
+		sparkle_stream.play()
 		get_tree().call_group(&"upgrade spring", &"queue_free")
 		coll_shape.set_deferred("disabled", true)
 		PlayerStats.player_health = health.health
@@ -163,6 +171,7 @@ func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
 	jump_particle.rotation = velocity.angle() + (PI/2)
 	jump_anim.play(&"hit")
 	sprite.play(&"jump")
+	hitbox.player_stomped.emit(self)
 
 
 func _on_hitbox_hurtbox_entered(hurtbox):
@@ -188,6 +197,7 @@ func _on_world_ended() -> void:
 
 
 func _on_health_harmed(amount: float) -> void:
+	hit_stream.play()
 	harm.amount = amount
 	harm.restart()
 
@@ -199,9 +209,11 @@ func _on_health_healed(amount: float) -> void:
 
 func _on_health_died() -> void:
 	coll_shape.set_deferred("disabled", true)
+	death_stream.play()
 	velocity.y = -jump_speed
 	velocity.x /= 1.5
 	friction = 0.0
 	knockback_gravity = 480
 	PlayerStats.player_died.emit()
+	PlayerStats.player_health = 5.0
 

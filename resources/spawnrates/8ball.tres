@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemySpawnRate" load_steps=6 format=3 uid="uid://cm863s1br8cg3"]
+
+[ext_resource type="PackedScene" uid="uid://baqd5vujajp4m" path="res://obj/8ball/8ball.tscn" id="1_em5o6"]
+[ext_resource type="Script" path="res://resources/spawnrates/spawnrate.gd" id="1_l38bb"]
+[ext_resource type="Script" path="res://resources/spawnrates/enemy_info.gd" id="2_elp4u"]
+
+[sub_resource type="Resource" id="Resource_u16wx"]
+script = ExtResource("2_elp4u")
+scene = ExtResource("1_em5o6")
+floating = true
+
+[sub_resource type="Curve" id="Curve_k2u2r"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0625, 1.375), 0.0, -0.164835, 0, 0, Vector2(1, 2), 2.71272, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+metadata/_snap_count = 16
+
+[resource]
+script = ExtResource("1_l38bb")
+data = SubResource("Resource_u16wx")
+world_max = 16
+spawn_rate = SubResource("Curve_k2u2r")

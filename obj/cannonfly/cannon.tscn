@@ -26,6 +26,7 @@ animations = [{
 }]
 
 [node name="Bullet" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
+collision_layer = 0
 script = ExtResource("1_i25nk")
 hurtbox = NodePath("Hurtbox")
 shootParticles = true

@@ -351,3 +351,4 @@ default_count = 3
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="hurtbox_entered" from="Hitbox" to="." method="_on_hitbox_hurtbox_entered"]
+[connection signal="player_stomped" from="Hitbox" to="." method="_on_hitbox_player_stomped"]

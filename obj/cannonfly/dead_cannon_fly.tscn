@@ -1,10 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4aeffl731rps"]
+[gd_scene load_steps=5 format=3 uid="uid://d4aeffl731rps"]
 
 [ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_cv7pw"]
 [ext_resource type="Texture2D" uid="uid://nwo62y6weo5j" path="res://obj/cannonfly/death.png" id="2_j4q61"]
+[ext_resource type="AudioStream" uid="uid://b7jyd2f6evkhx" path="res://Sounds/SFX/Enemy Death.wav" id="3_1r6sa"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8vl64"]
+random_pitch = 1.3
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("3_1r6sa")
+stream_0/weight = 1.0
 
 [node name="DeadCannonFly" type="Node2D"]
 script = ExtResource("1_cv7pw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j4q61")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8vl64")
+volume_db = 8.0
+pitch_scale = 1.2
+autoplay = true
+max_distance = 480.0
+attenuation = 2.07053
+bus = &"Audio"

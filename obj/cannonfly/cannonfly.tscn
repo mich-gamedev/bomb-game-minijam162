@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c5vvlnxbm0q4c"]
+[gd_scene load_steps=27 format=3 uid="uid://c5vvlnxbm0q4c"]
 
 [ext_resource type="Script" path="res://obj/cannonfly/cannonfly.gd" id="1_35gav"]
 [ext_resource type="Texture2D" uid="uid://bpk2nfffo8xgh" path="res://obj/cannonfly/cannonfly.png" id="1_ssw8a"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://components/health/Health.gd" id="8_1jb6r"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="9_arufw"]
 [ext_resource type="Texture2D" uid="uid://fxs4i0ctxfew" path="res://obj/player/jump_particle.png" id="10_prt1g"]
+[ext_resource type="AudioStream" uid="uid://d3aadmsksrs6o" path="res://Sounds/SFX/Cannonball Enemies Shooting.wav" id="11_xgjdq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xt3uh"]
 radius = 2.5
@@ -104,11 +105,46 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1), Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer2D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gkbxo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioStreamPlayer2D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y031k"]
 _data = {
+"RESET": SubResource("Animation_gkbxo"),
 "hit": SubResource("Animation_4yn08")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o8361"]
+random_pitch = 1.3
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("11_xgjdq")
+stream_0/weight = 1.0
 
 [node name="CannonFly" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 3
@@ -193,6 +229,13 @@ texture = ExtResource("10_prt1g")
 libraries = {
 "": SubResource("AnimationLibrary_y031k")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_o8361")
+pitch_scale = 1.2
+max_distance = 480.0
+attenuation = 2.2974
+bus = &"Audio"
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

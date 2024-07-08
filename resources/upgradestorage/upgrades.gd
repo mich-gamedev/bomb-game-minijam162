@@ -4,6 +4,7 @@ class_name UpgradeStorage extends Resource
 @export_range(0,2,0.01,"or_greater","suffix:x") var player_gravity : float = 1
 @export_range(0,2,0.01,"or_greater","suffix:x") var player_jump : float = 1
 @export_range(0,2,0.01,"or_greater","suffix:x") var player_slam_damage : float = 1
+@export_range(0,2,0.01,"or_greater","suffix:x") var invincibility_time : float = 1
 @export_range(0,2,0.01,"or_greater","suffix:x") var bomb_gravity : float = 1
 @export_range(0,2,0.01,"or_greater","suffix:x") var bomb_speed : float = 1
 @export_range(0,2,0.01,"or_greater","suffix:x") var bomb_damage: float = 1

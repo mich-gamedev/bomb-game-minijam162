@@ -20,9 +20,11 @@ func _ready() -> void:
 	PlayerStats.player_died.connect(_on_player_died)
 
 func tutorial() -> void:
+	EnemySpawner.active = false
 	UI.visible = false
 	inst = tutorial_map.instantiate()
 	add_child(inst)
+	MusicManager.transition(&"Battle", &"Upgrade", 0.5)
 
 func reload() -> void:
 	UI.visible = true
@@ -30,6 +32,7 @@ func reload() -> void:
 		inst.queue_free()
 	inst = maps.pick_random().instantiate()
 	add_child(inst)
+	MusicManager.transition(&"Upgrade", &"Battle", 0.5)
 	EnemySpawner.wave = 0
 	EnemySpawner.active = true
 	EnemySpawner.wave_started = false

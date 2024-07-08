@@ -6,14 +6,9 @@ extends RichTextLabel
 
 func _ready() -> void:
 	EnemySpawner.wave_just_started.connect(_flash_label)
-	EnemySpawner.world_ended.connect(_on_world_ended)
-	_on_world_ended()
 
 func _process(delta: float) -> void:
-	world_label.text = "WORLD:   %d \n HIGH SCORE:   %d" % [EnemySpawner.world, 0] #TODO: replace with high score
-
-func _on_world_ended() -> void:
-	world_label.text = "WORLD:   %d \n HIGH SCORE:   %d" % [EnemySpawner.world, 0] #TODO: replace with high score
+	world_label.text = "WORLD:   %d \n HIGH SCORE:   %d" % [EnemySpawner.world, Settings.save.high_score] #TODO: replace with high score
 
 func _flash_label() -> void:
 	if EnemySpawner.wave <= 3:

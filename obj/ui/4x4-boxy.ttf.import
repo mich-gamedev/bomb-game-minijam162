@@ -13,15 +13,15 @@ dest_files=["res://.godot/imported/4x4-boxy.ttf-8be8d160fb5ed87126a4512ec790e795
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=1
-subpixel_positioning=1
+hinting=0
+subpixel_positioning=0
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

@@ -15,6 +15,8 @@ extends Area2D
 
 var upgrade: UpgradePurchase
 @export var always_active: bool = false
+@export var settings: bool = false
+@export var exit: bool = false
 
 func _ready() -> void:
 	upgrade = Upgrades.possible_upgrades.pick_random() as UpgradePurchase
@@ -49,11 +51,21 @@ func _on_body_exited(body: Node2D) -> void:
 		anim.play(&"close")
 
 
-func _on_hitbox_hurtbox_entered(hurtbox: Hurtbox) -> void:
+func _on_hitbox_player_stomped(player: CharacterBody2D) -> void:
 	if visible and !timer.time_left:
-		visible = false
 		if !always_active:
 			Upgrades.add_upgrade(upgrade)
-		trans.play(&"close")
-		await trans.animation_finished
-		get_tree().current_scene.reload()
+			visible = false
+		if settings:
+			Settings.pause()
+			visible = false
+		if exit:
+			get_tree().quit()
+		if !settings and !exit:
+			trans.play(&"close")
+			await trans.animation_finished
+			get_tree().current_scene.reload()
+		if settings:
+			while !player.is_on_floor():
+				await get_tree().physics_frame
+			visible = true

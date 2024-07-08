@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://b2y8ybgoph4ku"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_yk760"]
+
+[resource]
+script = ExtResource("1_yk760")
+title = "brute"
+description = "[pos]+[/color]0.35 slam damage, but
+[pos]-[/color]0.1 secs invincibility
+time after being damaged"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+player_slam_damage = 1.0
+invincibility_time = 1.0
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.0
+bomb_spread = 15
+explosion_radius = 1.0
+bomb_count = 0

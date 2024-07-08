@@ -1,0 +1,365 @@
+[gd_scene load_steps=27 format=3 uid="uid://cyfkihpnxsk8u"]
+
+[ext_resource type="Script" path="res://obj/ui/settings/gamesettings.gd" id="1_cnk8v"]
+[ext_resource type="Texture2D" uid="uid://dwipoyy7234lx" path="res://obj/upgrade spring/springpanel.png" id="1_f5oc3"]
+[ext_resource type="Texture2D" uid="uid://6h6if7yoiwrp" path="res://obj/ui/settings/bargrabber.png" id="2_d0bm0"]
+[ext_resource type="Texture2D" uid="uid://ckplyvjejxdu1" path="res://obj/ui/settings/bar_bg1.png" id="3_2wv4f"]
+[ext_resource type="Script" path="res://resources/map scenes/GPUParticles2D.gd" id="3_f6wic"]
+[ext_resource type="Texture2D" uid="uid://bt3bxyvdchtmq" path="res://obj/ui/settings/bar1.png" id="4_5w0aa"]
+[ext_resource type="Theme" uid="uid://h5krak2587fn" path="res://obj/ui/settings/settingsui.tres" id="5_nt8dg"]
+[ext_resource type="Texture2D" uid="uid://dati8qgurmcnr" path="res://obj/upgrade spring/springarrow.png" id="6_8oe6p"]
+[ext_resource type="Texture2D" uid="uid://4bevfw5opsjq" path="res://obj/ui/settings/checkbox1.png" id="8_pil7v"]
+[ext_resource type="Script" path="res://obj/ui/settings/MusicSlider.gd" id="8_qae2h"]
+[ext_resource type="Texture2D" uid="uid://c5yusskatmmn4" path="res://obj/ui/settings/checkbox3.png" id="9_8qfi4"]
+[ext_resource type="Script" path="res://obj/ui/settings/SFXslider.gd" id="9_gg7rv"]
+[ext_resource type="Script" path="res://obj/ui/settings/PixelButton.gd" id="12_dhwgu"]
+[ext_resource type="Script" path="res://obj/ui/settings/ParticleButton.gd" id="13_wn1tj"]
+[ext_resource type="Script" path="res://obj/ui/settings/buttons.gd" id="14_si527"]
+
+[sub_resource type="Curve" id="Curve_wdvwr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.170543, 1), 0.0, 0.0, 0, 0, Vector2(0.484496, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_puhm0"]
+curve = SubResource("Curve_wdvwr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fhapf"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 30.0
+flatness = 0.5
+initial_velocity_min = 16.0
+initial_velocity_max = 256.0
+gravity = Vector3(0, 48, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_puhm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wh7r6"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(-2, 1, 0)
+spread = 30.0
+initial_velocity_min = 16.0
+initial_velocity_max = 128.0
+gravity = Vector3(0, 64, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_puhm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwcju"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(2, 1, 0)
+spread = 30.0
+initial_velocity_min = 16.0
+initial_velocity_max = 128.0
+gravity = Vector3(0, 64, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_puhm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i7c0l"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(1, -2, 0)
+spread = 30.0
+initial_velocity_min = 16.0
+initial_velocity_max = 160.0
+gravity = Vector3(0, 64, 0)
+damping_min = 60.825
+damping_max = 60.825
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_puhm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tg75l"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(2, 3, 0)
+spread = 10.0
+initial_velocity_min = 16.0
+initial_velocity_max = 256.0
+gravity = Vector3(0, 48, 0)
+damping_min = 100.0
+damping_max = 100.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_puhm0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ieal3"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("1_f5oc3")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0eaqw"]
+texture = ExtResource("3_2wv4f")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i8btf"]
+texture = ExtResource("4_5w0aa")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_p58ux"]
+color = Color(1, 0, 0.745098, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_cnk8v")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nt8dg")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
+modulate = Color(1, 0, 0.745098, 1)
+position = Vector2(-2, 103)
+emitting = false
+amount = 48
+process_material = SubResource("ParticleProcessMaterial_fhapf")
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+script = ExtResource("3_f6wic")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="Control"]
+modulate = Color(0.745098, 1, 0, 1)
+position = Vector2(209, -15)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_wh7r6")
+lifetime = 6.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.5
+script = ExtResource("3_f6wic")
+
+[node name="GPUParticles2D4" type="GPUParticles2D" parent="Control"]
+modulate = Color(0.745098, 1, 0, 1)
+position = Vector2(-5, 120)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_lwcju")
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.5
+script = ExtResource("3_f6wic")
+
+[node name="GPUParticles2D5" type="GPUParticles2D" parent="Control"]
+modulate = Color(0.745098, 1, 0, 1)
+position = Vector2(154, 173)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_i7c0l")
+lifetime = 8.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.5
+script = ExtResource("3_f6wic")
+
+[node name="GPUParticles2D3" type="GPUParticles2D" parent="Control"]
+modulate = Color(0, 0.745098, 1, 1)
+position = Vector2(140, -11)
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_tg75l")
+lifetime = 9.0
+one_shot = true
+explosiveness = 0.95
+randomness = 0.25
+script = ExtResource("3_f6wic")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_nt8dg")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_ieal3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Music" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Music"]
+layout_mode = 2
+text = "MUSIC VOLUME"
+
+[node name="MusicSlider" type="HSlider" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Music"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 9)
+layout_mode = 2
+theme = ExtResource("5_nt8dg")
+theme_override_icons/grabber = ExtResource("2_d0bm0")
+theme_override_styles/slider = SubResource("StyleBoxTexture_0eaqw")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_i8btf")
+max_value = 1.0
+step = 0.01
+value = 0.75
+script = ExtResource("8_qae2h")
+
+[node name="SFX" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/VBoxContainer/SFX"]
+layout_mode = 2
+text = "SFX VOLUME"
+
+[node name="SFXslider" type="HSlider" parent="Control/MarginContainer/PanelContainer/VBoxContainer/SFX"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 9)
+layout_mode = 2
+theme = ExtResource("5_nt8dg")
+theme_override_icons/grabber = ExtResource("2_d0bm0")
+theme_override_styles/slider = SubResource("StyleBoxTexture_0eaqw")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_i8btf")
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("9_gg7rv")
+
+[node name="Pixel Perfect" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect"]
+layout_mode = 2
+text = "PIXEL PERFECT"
+
+[node name="PixelButton" type="CheckBox" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(11, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_icons/checked = ExtResource("8_pil7v")
+theme_override_icons/unchecked = ExtResource("9_8qfi4")
+button_pressed = true
+script = ExtResource("12_dhwgu")
+
+[node name="Pixel Perfect2" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect2"]
+layout_mode = 2
+text = "PARTICLES"
+
+[node name="ParticleButton" type="CheckBox" parent="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(11, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_icons/checked = ExtResource("8_pil7v")
+theme_override_icons/unchecked = ExtResource("9_8qfi4")
+button_pressed = true
+script = ExtResource("13_wn1tj")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 1
+script = ExtResource("14_si527")
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+theme_override_styles/separator = SubResource("StyleBoxLine_p58ux")
+
+[node name="BackButton" type="Button" parent="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 8)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_nt8dg")
+text = "BACK"
+
+[node name="MainMenu" type="Button" parent="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 8)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_nt8dg")
+text = "MAIN MENU"
+
+[node name="Leave" type="Button" parent="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 8)
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("5_nt8dg")
+text = "LEAVE GAME"
+
+[node name="Springarrow" type="TextureRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -17.0
+offset_right = 4.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("6_8oe6p")
+
+[connection signal="finished" from="Control/GPUParticles2D" to="Control/GPUParticles2D" method="_on_finished"]
+[connection signal="finished" from="Control/GPUParticles2D2" to="Control/GPUParticles2D2" method="_on_finished"]
+[connection signal="finished" from="Control/GPUParticles2D4" to="Control/GPUParticles2D4" method="_on_finished"]
+[connection signal="finished" from="Control/GPUParticles2D5" to="Control/GPUParticles2D5" method="_on_finished"]
+[connection signal="finished" from="Control/GPUParticles2D3" to="Control/GPUParticles2D3" method="_on_finished"]
+[connection signal="value_changed" from="Control/MarginContainer/PanelContainer/VBoxContainer/Music/MusicSlider" to="Control/MarginContainer/PanelContainer/VBoxContainer/Music/MusicSlider" method="_on_value_changed"]
+[connection signal="value_changed" from="Control/MarginContainer/PanelContainer/VBoxContainer/SFX/SFXslider" to="Control/MarginContainer/PanelContainer/VBoxContainer/SFX/SFXslider" method="_on_value_changed"]
+[connection signal="toggled" from="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect/PixelButton" to="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect/PixelButton" method="_on_toggled"]
+[connection signal="toggled" from="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect2/ParticleButton" to="Control/MarginContainer/PanelContainer/VBoxContainer/Pixel Perfect2/ParticleButton" method="_on_toggled"]
+[connection signal="pressed" from="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/BackButton" to="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/MainMenu" to="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Leave" to="Control/MarginContainer/PanelContainer/VBoxContainer/HBoxContainer" method="_on_leave_pressed"]

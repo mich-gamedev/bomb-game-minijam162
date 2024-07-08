@@ -1,22 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://sew5eqqdtn50"]
+[gd_scene load_steps=2 format=3 uid="uid://qgopryu6ymt"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yab1g"]
 particle_flag_disable_z = true
 spread = 180.0
 initial_velocity_min = 20.0
-initial_velocity_max = 50.0
+initial_velocity_max = 96.0
 gravity = Vector3(0, 100, 0)
-scale_max = 3.0
-color = Color(0, 0.419608, 0.752941, 1)
+scale_max = 2.0
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.5
 
 [node name="cannonExplosion" type="GPUParticles2D"]
 emitting = false
-amount = 20
+amount = 5
 process_material = SubResource("ParticleProcessMaterial_yab1g")
-lifetime = 2.0
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 0

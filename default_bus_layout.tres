@@ -1,4 +1,12 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://cu2tvhjkt2si7"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cu2tvhjkt2si7"]
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_qsxmd"]
+resource_name = "Filter"
+db = 2
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_haq70"]
+resource_name = "EQ"
+band_db/1000_hz = -60.0
 
 [resource]
 bus/1/name = &"Music"
@@ -7,9 +15,25 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectFilter_qsxmd")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectEQ_haq70")
+bus/1/effect/1/enabled = false
 bus/2/name = &"Audio"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
+bus/2/volume_db = -0.528235
 bus/2/send = &"Master"
+bus/3/name = &"Battle"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -80.0
+bus/3/send = &"Music"
+bus/4/name = &"Upgrade"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -80.0
+bus/4/send = &"Music"

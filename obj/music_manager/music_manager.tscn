@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://uph3relffdi8"]
+
+[ext_resource type="Script" path="res://obj/music_manager/music_manager.gd" id="1_3tkvk"]
+[ext_resource type="AudioStream" uid="uid://c25xwsbk60ye7" path="res://Sounds/Music/Mini Jam Music - Upgrade Music.wav" id="2_1bukm"]
+[ext_resource type="AudioStream" uid="uid://cnhx4v5suggvg" path="res://Sounds/Music/Mini Jam Music.wav" id="3_a0yip"]
+
+[node name="MusicManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_3tkvk")
+
+[node name="Upgrade" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1bukm")
+volume_db = -5.0
+bus = &"Upgrade"
+
+[node name="Battle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a0yip")
+volume_db = -5.0
+bus = &"Battle"

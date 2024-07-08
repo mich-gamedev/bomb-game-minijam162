@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="UpgradePurchase" load_steps=2 format=3 uid="uid://cvqd7yk6ywwl"]
+
+[ext_resource type="Script" path="res://resources/upgradestorage/purchased_upgrade.gd" id="1_bao4a"]
+
+[resource]
+script = ExtResource("1_bao4a")
+title = "medic"
+description = "[pos]+[/color]0.25 secsinvincibility 
+time after being damaged"
+player_speed = 1.0
+player_gravity = 1.0
+player_jump = 1.0
+player_slam_damage = 1.0
+invincibility_time = 1.25
+bomb_gravity = 1.0
+bomb_speed = 1.0
+bomb_damage = 1.0
+bomb_spread = 15
+explosion_radius = 1.0
+bomb_count = 0
