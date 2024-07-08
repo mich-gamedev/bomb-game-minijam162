@@ -106,7 +106,7 @@ lifetime = 1.5
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1evii")
 autoplay = "default"
-frame_progress = 0.0558946
+frame_progress = 0.252794
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

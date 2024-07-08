@@ -118,10 +118,12 @@ attenuation = 4.28709
 [node name="In" type="GPUParticles2D" parent="Area2D"]
 z_index = -5
 emitting = false
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_pgk8s")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+visibility_rect = Rect2(0, 0, 0, 0)
 local_coords = true
 
 [node name="Out" type="GPUParticles2D" parent="Area2D"]
@@ -155,6 +157,7 @@ attenuation = 4.28709
 [node name="In" type="GPUParticles2D" parent="Area2D2"]
 z_index = -5
 emitting = false
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_pgk8s")
 one_shot = true
 explosiveness = 1.0
