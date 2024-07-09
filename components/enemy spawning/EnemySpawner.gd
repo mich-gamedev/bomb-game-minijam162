@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 		wave_just_started.emit()
 		if wave >= 4:
 			MusicManager.transition(&"Battle", &"Upgrade", 1.0)
-			enemy_count += randf_range(0,1)
+			enemy_count += randi_range(0,2)
 			world_ended.emit()
 			world += 1
 			if EnemySpawner.world > (Settings.save as SaveData).high_score:

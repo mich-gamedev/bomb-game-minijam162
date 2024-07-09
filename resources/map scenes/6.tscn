@@ -9,7 +9,7 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.228682, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.88529, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_lmdaj"]
+[sub_resource type="CurveTexture" id="CurveTexture_rltpa"]
 curve = SubResource("Curve_glmd0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7uxec"]
@@ -21,7 +21,7 @@ direction = Vector3(0, -1, 0)
 spread = 0.0
 initial_velocity_max = 32.0
 gravity = Vector3(0, 32, 0)
-scale_curve = SubResource("CurveTexture_lmdaj")
+scale_curve = SubResource("CurveTexture_rltpa")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80b5"]
 size = Vector2(208, 16)

@@ -208,6 +208,15 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_xpjy1")
 
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="TextureButton" type="TextureButton" parent="Button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="finished" from="GPUParticles2D2" to="GPUParticles2D2" method="_on_finished"]
 [connection signal="finished" from="GPUParticles2D3" to="GPUParticles2D3" method="_on_finished"]
 [connection signal="finished" from="GPUParticles2D4" to="GPUParticles2D4" method="_on_finished"]

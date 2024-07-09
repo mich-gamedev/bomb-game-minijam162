@@ -1,12 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://ca4acqyeuy1pv"]
+[gd_scene load_steps=25 format=3 uid="uid://ca4acqyeuy1pv"]
 
 [ext_resource type="Script" path="res://obj/tank/tank.gd" id="1_ha4n2"]
 [ext_resource type="Texture2D" uid="uid://b8j8r1t28kxu4" path="res://obj/tank/tank.png" id="1_uydhm"]
-[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_0glud"]
 [ext_resource type="Script" path="res://components/firebullet/fire_bullet.gd" id="2_2dtfq"]
 [ext_resource type="Shader" path="res://resources/shaders/sway.gdshader" id="2_p7xli"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="3_d6hsq"]
-[ext_resource type="PackedScene" uid="uid://cybgops35wy1r" path="res://obj/tank/dead_tank.tscn" id="3_v5wfd"]
 [ext_resource type="PackedScene" uid="uid://cyydlmngkqy4g" path="res://obj/cannonfly/cannon.tscn" id="4_7hnkx"]
 [ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="5_w2mda"]
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="7_11pbo"]
@@ -21,6 +19,7 @@ seamless = true
 noise = SubResource("FastNoiseLite_8nw8y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vgb4e"]
+resource_local_to_scene = true
 shader = ExtResource("2_p7xli")
 shader_parameter/pixel_mode = false
 shader_parameter/pixel_amount = 32.0
@@ -101,9 +100,6 @@ size = Vector2(14, 3)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_ha4n2")
-
-[node name="EnemyDeath" parent="." instance=ExtResource("2_0glud")]
-dead_body = ExtResource("3_v5wfd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -211,4 +207,3 @@ pooler = NodePath("../FireBullet/NodePooler")
 
 [connection signal="timeout" from="FireBullet/Timer" to="." method="_on_timer_timeout"]
 [connection signal="died" from="Hitbox/Health" to="." method="_on_health_died"]
-[connection signal="died" from="Hitbox/Health" to="EnemyDeath" method="_on_health_died"]

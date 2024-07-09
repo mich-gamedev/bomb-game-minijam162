@@ -22,6 +22,7 @@ const possible_upgrades: Array[UpgradeStorage] = [
 	preload("res://resources/upgradestorage/upgrades/brute.tres"),
 	preload("res://resources/upgradestorage/upgrades/lead.tres"),
 	preload("res://resources/upgradestorage/upgrades/detonation.tres"),
+	preload("res://resources/upgradestorage/upgrades/rubberband.tres"),
 ]
 
 func reset() -> void:

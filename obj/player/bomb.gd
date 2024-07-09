@@ -3,6 +3,9 @@ extends Bullet
 @onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var node_pooler: NodePooler = $NodePooler
 
+func unstash_item(pooler: NodePooler, pool: StringName):
+	bounces_left = Upgrades.current.bomb_bounces
+
 func _process(delta: float) -> void:
 	velocity.y += 240 * delta * Upgrades.current.bomb_gravity
 

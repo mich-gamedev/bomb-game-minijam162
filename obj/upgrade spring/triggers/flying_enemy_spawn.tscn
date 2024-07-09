@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dl613xunl13ce"]
 
-[ext_resource type="Texture2D" uid="uid://dnru8cabpw6tq" path="res://obj/triggers/flying_enemy_spawn.png" id="1_bn7gp"]
+[ext_resource type="Texture2D" uid="uid://dnru8cabpw6tq" path="res://obj/upgrade spring/triggers/flying_enemy_spawn.png" id="1_bn7gp"]
 
 [sub_resource type="GDScript" id="GDScript_ffwlw"]
 script/source = "extends Sprite2D

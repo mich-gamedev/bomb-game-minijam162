@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://ctighvtsc2psr" path="res://resources/tileset/ground1/ground1.png" id="1_8xapr"]
 [ext_resource type="Texture2D" uid="uid://djjgyvimxm71d" path="res://resources/tileset/oneway1/oneway1.png" id="1_46bjb"]
 [ext_resource type="PackedScene" uid="uid://b2vij8baleh0h" path="res://obj/dirt/dirt.tscn" id="3_b8ike"]
-[ext_resource type="PackedScene" uid="uid://c64hmrigvt1i8" path="res://obj/triggers/ground_enemy_spawn.tscn" id="4_2jxmd"]
+[ext_resource type="PackedScene" uid="uid://c64hmrigvt1i8" path="res://obj/upgrade spring/triggers/ground_enemy_spawn.tscn" id="4_2jxmd"]
 [ext_resource type="PackedScene" uid="uid://gwm5y6p0x7aj" path="res://obj/upgrade spring/spring.tscn" id="4_h4xxj"]
-[ext_resource type="PackedScene" uid="uid://dl613xunl13ce" path="res://obj/triggers/flying_enemy_spawn.tscn" id="5_f85fb"]
+[ext_resource type="PackedScene" uid="uid://dl613xunl13ce" path="res://obj/upgrade spring/triggers/flying_enemy_spawn.tscn" id="5_f85fb"]
 [ext_resource type="PackedScene" uid="uid://c0o1qf4cpc4jj" path="res://obj/decorations/floor_deco.tscn" id="7_pis5y"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y2x3c"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c64hmrigvt1i8"]
 
-[ext_resource type="Texture2D" uid="uid://cjpy4xj275ufr" path="res://obj/triggers/groundenemyspawn.png" id="1_x3oa3"]
+[ext_resource type="Texture2D" uid="uid://cjpy4xj275ufr" path="res://obj/upgrade spring/triggers/groundenemyspawn.png" id="1_x3oa3"]
 
 [sub_resource type="GDScript" id="GDScript_hwyph"]
 script/source = "extends Sprite2D

@@ -158,7 +158,6 @@ func _on_hurtbox_hitbox_entered(hitbox: Hitbox) -> void:
 	if hitbox.is_in_group(&"end_spring") and !(hitbox.owner.timer.time_left) and !hitbox.owner.settings and !hitbox.owner.exit:
 		spring_stream.play()
 		sparkle_stream.play()
-		get_tree().call_group(&"upgrade spring", &"queue_free")
 		coll_shape.set_deferred("disabled", true)
 		PlayerStats.player_health = health.health
 		velocity.y = 0
