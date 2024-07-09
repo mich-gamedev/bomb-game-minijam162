@@ -11,8 +11,8 @@ floating = true
 
 [sub_resource type="Curve" id="Curve_ftemy"]
 max_value = 4.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253968, 0), 0.0, 0.0, 0, 0, Vector2(1, 2.03243), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.253968, 0), 0.0, 0.0, 0, 0, Vector2(0.366013, 1.14136), 0.0, 0.0, 0, 0, Vector2(1, 2.03243), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [resource]
 script = ExtResource("1_fequ4")

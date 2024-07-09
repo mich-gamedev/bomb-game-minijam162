@@ -11,7 +11,7 @@ floating = false
 
 [sub_resource type="Curve" id="Curve_3mesi"]
 max_value = 2.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.248322, 0), 0.0, 0.0, 0, 0, Vector2(0.494709, 1.44286), 0.0, 0.0, 0, 0, Vector2(1, 0.991837), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.248322, 0), 0.0, 0.0, 0, 0, Vector2(0.598039, 0.97625), 0.0, 0.0, 0, 0, Vector2(1, 0.991837), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [resource]
