@@ -17,5 +17,5 @@ bomb_damage = 1.0
 bomb_spread = 0
 explosion_radius = 1.0
 bomb_count = 0
-bomb_bounces = 0
+bomb_bounces = 1
 dropped_bombs_on_death = 0

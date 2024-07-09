@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://7pqj5hj74nqq"]
+[gd_scene load_steps=16 format=3 uid="uid://7pqj5hj74nqq"]
 
 [ext_resource type="Script" path="res://obj/dirt/dirt_pooled.gd" id="1_fdee2"]
 [ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="1_uw05u"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_ieoam"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_qeyke"]
+[ext_resource type="PackedScene" uid="uid://bpc6ji5fvyrtp" path="res://obj/dirt/dead_dirt.tscn" id="3_wraor"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="3_y2wky"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="5_6hcx4"]
 [ext_resource type="PackedScene" uid="uid://cqn4tqwh31lh4" path="res://obj/dirt/dirt_sfx.tscn" id="6_32610"]
@@ -46,6 +48,9 @@ collision_use_scale = true
 
 [node name="PooledItem2D" type="Node2D"]
 script = ExtResource("1_fdee2")
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_ieoam")]
+dead_body = ExtResource("3_wraor")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 131
@@ -93,3 +98,4 @@ pool_scene = ExtResource("6_32610")
 default_count = 1
 
 [connection signal="died" from="StaticBody2D/Hitbox/Health" to="." method="_on_health_died"]
+[connection signal="died" from="StaticBody2D/Hitbox/Health" to="EnemyDeath" method="_on_health_died"]
