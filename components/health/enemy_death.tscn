@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq4kbojomnhfr"]
+
+[ext_resource type="Script" path="res://components/health/EnemyDeath.gd" id="1_6upv5"]
+[ext_resource type="Script" path="res://components/firebullet/fire_bullet.gd" id="2_6wq2d"]
+[ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="3_i2dlh"]
+[ext_resource type="PackedScene" uid="uid://btlb3mqfsxhfk" path="res://obj/player/bomb.tscn" id="4_ve4nu"]
+
+[node name="EnemyDeath" type="Node2D"]
+script = ExtResource("1_6upv5")
+
+[node name="FireBullet" type="Node2D" parent="." node_paths=PackedStringArray("pooler")]
+position = Vector2(0, -17)
+script = ExtResource("2_6wq2d")
+speed = 160.0
+projectile_range = 6.28319
+pooler = NodePath("NodePooler")
+
+[node name="NodePooler" type="Node" parent="FireBullet"]
+script = ExtResource("3_i2dlh")
+pool_name = &"player_bomb"
+pool_scene = ExtResource("4_ve4nu")
+default_count = 1

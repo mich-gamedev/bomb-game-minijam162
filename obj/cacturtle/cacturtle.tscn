@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7px8ecf6whr"]
+[gd_scene load_steps=19 format=3 uid="uid://c7px8ecf6whr"]
 
 [ext_resource type="Script" path="res://obj/cacturtle/cacturtle.gd" id="1_ckffk"]
 [ext_resource type="Texture2D" uid="uid://c0sj1hwtv4yw0" path="res://obj/cacturtle/cacturtle.png" id="1_ssfyc"]
 [ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="2_1ieq4"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_eyqvc"]
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="3_2daob"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="4_tsapm"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="5_alcd0"]
@@ -60,6 +61,8 @@ size = Vector2(14, 20)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_ckffk")
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_eyqvc")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -136,3 +139,5 @@ default_count = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_kex2o")
+
+[connection signal="died" from="Hitbox/Health" to="EnemyDeath" method="_on_health_died"]

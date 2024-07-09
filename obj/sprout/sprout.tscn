@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8iuxvju8vwjo"]
+[gd_scene load_steps=23 format=3 uid="uid://b8iuxvju8vwjo"]
 
 [ext_resource type="Texture2D" uid="uid://cp6m6v2sbf46w" path="res://obj/sprout/sprout.png" id="1_acmkg"]
 [ext_resource type="Script" path="res://obj/sprout/sprout.gd" id="1_g5lys"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_dmyef"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_hl75d"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="3_lbhdm"]
 [ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="5_hbx86"]
@@ -85,6 +86,8 @@ script = ExtResource("1_g5lys")
 speed = 32.0
 gravity = 640.0
 terminal_velocity = 256.0
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_dmyef")]
 
 [node name="WalkAndBump" type="Node" parent="." node_paths=PackedStringArray("actor", "left_ray", "right_ray")]
 script = ExtResource("9_we61f")
@@ -179,3 +182,4 @@ target_position = Vector2(5, 0)
 collision_mask = 3
 
 [connection signal="died" from="JumpHitbox/Health" to="." method="_on_health_died"]
+[connection signal="died" from="JumpHitbox/Health" to="EnemyDeath" method="_on_health_died"]

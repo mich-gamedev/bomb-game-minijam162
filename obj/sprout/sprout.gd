@@ -8,7 +8,6 @@ extends CharacterBody2D
 @onready var left_raycast: RayCast2D = $LeftRaycast
 @onready var right_raycast: RayCast2D = $RightRaycast
 
-var dead_body = preload("res://obj/sprout/dead_sprout.tscn")
 
 func _ready() -> void:
 	node_pooler.default_parent = get_tree().current_scene.inst

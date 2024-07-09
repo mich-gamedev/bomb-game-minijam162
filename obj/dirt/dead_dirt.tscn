@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpc6ji5fvyrtp"]
+
+[ext_resource type="Script" path="res://components/health/EnemyCorpse.gd" id="1_mgh10"]
+[ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="2_pifys"]
+
+[node name="dead_dirt" type="Node2D"]
+script = ExtResource("1_mgh10")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.419608)
+rotation = -0.785398
+texture = ExtResource("2_pifys")

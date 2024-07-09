@@ -24,3 +24,21 @@ func fire(angle: float) -> Array[Bullet]:
 				bullets.append(bullet)
 		return bullets
 	return []
+
+func fire_from_enemy(angle: float) -> Array[Bullet]:
+	if !is_instance_valid(timer) or timer.time_left == 0:
+		var bullets: Array[Bullet]
+		if is_instance_valid(timer): timer.start()
+		for i in projectile_count:
+			var bullet = pooler.grab_available_object()
+			bullet.global_position = global_position
+			if bullet is Bullet:
+				if bullet.hurtbox: bullet.hurtbox.damage = damage
+				if projectile_count > 1:
+					var new_angle = (angle + (i * projectile_range / float(projectile_count))) - (projectile_range / 2.0)
+					bullet.velocity = Vector2.from_angle(new_angle) * speed
+				else:
+					bullet.velocity = Vector2.from_angle(angle) * speed
+				bullets.append(bullet)
+		return bullets
+	return []

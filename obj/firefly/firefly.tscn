@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://huxioaar0s23"]
+[gd_scene load_steps=18 format=3 uid="uid://huxioaar0s23"]
 
 [ext_resource type="Texture2D" uid="uid://cq7ur60n4fgwv" path="res://obj/firefly/firefly.png" id="1_5cnsd"]
 [ext_resource type="Script" path="res://obj/firefly/firefly.gd" id="1_ugqop"]
 [ext_resource type="Script" path="res://components/movement/move_towards.gd" id="2_cegup"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_gc4pn"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="3_xdiuw"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="4_f15i3"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="5_ha0yx"]
@@ -58,6 +59,8 @@ size = Vector2(10, 9)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ugqop")
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_gc4pn")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

@@ -5,7 +5,6 @@ extends CharacterBody2D
 
 @export var noise: FastNoiseLite
 @onready var head_place = $Node2D/Hitbox/CollisionShape2D/HeadPlace
-var dead_body = preload("res://obj/longlegs/dead_long_legs.tscn")
 
 func _ready() -> void:
 	noise.seed = randi()
@@ -21,8 +20,3 @@ func _physics_process(delta: float) -> void:
 	sprite_2.position = sprite_1.position
 	move_and_slide()
 
-
-func _on_health_died():
-	var body_inst = dead_body.instantiate()
-	body_inst.global_position = head_place.global_position
-	get_parent().add_child(body_inst)

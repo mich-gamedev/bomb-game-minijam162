@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://nebhl1hrmhu5"]
+[gd_scene load_steps=14 format=3 uid="uid://nebhl1hrmhu5"]
 
 [ext_resource type="Script" path="res://addons/nine_patch_sprite_2d/nine_patch_sprite_2d.gd" id="1_sqyog"]
 [ext_resource type="Script" path="res://obj/longlegs/longlegs.gd" id="1_xwdt1"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_t7g1m"]
 [ext_resource type="Texture2D" uid="uid://dytmvv15aclyv" path="res://obj/longlegs/longlegs1.png" id="3_eijor"]
+[ext_resource type="PackedScene" uid="uid://b3oj8fn2jhcbd" path="res://obj/longlegs/dead_long_legs.tscn" id="3_x6y00"]
 [ext_resource type="Texture2D" uid="uid://cprw635f7ayxq" path="res://obj/longlegs/longlegs2.png" id="4_l6eo5"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="5_hwwnc"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="6_1sn1o"]
@@ -26,6 +28,10 @@ collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_xwdt1")
 noise = SubResource("FastNoiseLite_uf7jc")
+
+[node name="EnemyDeath" parent="." node_paths=PackedStringArray("custom_place") instance=ExtResource("2_t7g1m")]
+dead_body = ExtResource("3_x6y00")
+custom_place = NodePath("../Node2D/Hitbox/CollisionShape2D/HeadPlace")
 
 [node name="NinePatchSprite2D" type="Node2D" parent="."]
 position = Vector2(0, -16)
@@ -89,4 +95,4 @@ position = Vector2(-6, 0)
 shape = SubResource("SegmentShape2D_76p3p")
 one_way_collision = true
 
-[connection signal="died" from="Node2D/Hitbox/Health" to="." method="_on_health_died"]
+[connection signal="died" from="Node2D/Hitbox/Health" to="EnemyDeath" method="_on_health_died"]

@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var death_bullet: FireBullet = $FireBullet2
 
+
 func _ready() -> void:
 	fire_bullet.projectile_count -= 1
 	_on_timer_timeout()

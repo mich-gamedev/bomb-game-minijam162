@@ -1,7 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://baqd5vujajp4m"]
+[gd_scene load_steps=24 format=3 uid="uid://baqd5vujajp4m"]
 
 [ext_resource type="Texture2D" uid="uid://deibpk01xk3al" path="res://obj/8ball/8ball.png" id="1_cejib"]
 [ext_resource type="Script" path="res://obj/8ball/8ball.gd" id="1_v3mhe"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_n5ela"]
+[ext_resource type="PackedScene" uid="uid://drkp2nkfj3ocj" path="res://obj/8ball/dead_8_ball.tscn" id="3_jvowb"]
 [ext_resource type="Script" path="res://components/movement/CollideAndBounce.gd" id="3_xfhp1"]
 [ext_resource type="AudioStream" uid="uid://drvl5gxi6k7yt" path="res://obj/8ball/roll.mp3" id="4_74mg0"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="5_o3j4u"]
@@ -95,7 +97,9 @@ size = Vector2(8, 4)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_v3mhe")
-speed = 48.0
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_n5ela")]
+dead_body = ExtResource("3_jvowb")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 16
@@ -161,3 +165,5 @@ script = ExtResource("7_ml2gw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_tayrk")
+
+[connection signal="died" from="Hitbox/Health" to="EnemyDeath" method="_on_health_died"]

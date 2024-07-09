@@ -1,11 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2vij8baleh0h"]
+[gd_scene load_steps=12 format=3 uid="uid://b2vij8baleh0h"]
 
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="1_1uomu"]
 [ext_resource type="Texture2D" uid="uid://c1lethqoc4hvt" path="res://obj/dirt/dirt.png" id="1_67byu"]
 [ext_resource type="Script" path="res://components/health/Hitbox.gd" id="2_ios2o"]
+[ext_resource type="PackedScene" uid="uid://bpc6ji5fvyrtp" path="res://obj/dirt/dead_dirt.tscn" id="2_onyqv"]
 [ext_resource type="Script" path="res://components/health/Health.gd" id="3_gc1dh"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="4_qd01g"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="5_epfxg"]
 [ext_resource type="PackedScene" uid="uid://cqn4tqwh31lh4" path="res://obj/dirt/dirt_sfx.tscn" id="6_6xc1k"]
+
+[sub_resource type="GDScript" id="GDScript_35cnm"]
+script/source = "extends Node2D
+
+var dead_body = preload(\"res://obj/dirt/dead_dirt.tscn\")
+
+func _on_health_died():
+	var body_inst = dead_body.instantiate()
+	body_inst.global_position = global_position
+	get_parent().add_child(body_inst)
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwmqt"]
 size = Vector2(8, 8)
@@ -16,6 +29,10 @@ size = Vector2(12, 12)
 [node name="StaticBody2D" type="StaticBody2D"]
 collision_layer = 131
 collision_mask = 131
+script = SubResource("GDScript_35cnm")
+
+[node name="EnemyDeath" parent="." instance=ExtResource("1_1uomu")]
+dead_body = ExtResource("2_onyqv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -50,3 +67,5 @@ default_count = 3
 visible = false
 shape = SubResource("RectangleShape2D_povms")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[connection signal="died" from="Hitbox/Health" to="EnemyDeath" method="_on_health_died"]

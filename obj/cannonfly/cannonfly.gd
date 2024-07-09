@@ -6,7 +6,6 @@ extends CharacterBody2D
 @onready var anim: AnimationPlayer = $JumpParticle/AnimationPlayer
 @onready var jump_particle: Sprite2D = $JumpParticle
 
-var dead_body = preload("res://obj/cannonfly/dead_cannon_fly.tscn")
 
 func _physics_process(delta: float) -> void:
 	velocity = velocity.move_toward(Vector2.ZERO, 64 * delta)
@@ -33,8 +32,3 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 		await sprite.animation_finished
 		sprite.play(&"idle")
 
-
-func _on_health_died():
-	var body_inst = dead_body.instantiate()
-	body_inst.global_position = global_position
-	get_parent().add_child(body_inst)
