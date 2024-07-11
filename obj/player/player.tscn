@@ -1,7 +1,8 @@
-[gd_scene load_steps=77 format=3 uid="uid://cpib3ohf10c14"]
+[gd_scene load_steps=79 format=3 uid="uid://cpib3ohf10c14"]
 
 [ext_resource type="Texture2D" uid="uid://cbd5ma4ejm8sh" path="res://obj/player/player.png" id="1_5gjv1"]
 [ext_resource type="Script" path="res://obj/player/player.gd" id="1_b27ee"]
+[ext_resource type="Shader" path="res://resources/shaders/custom_colors.gdshader" id="2_hl7w6"]
 [ext_resource type="Script" path="res://components/firebullet/fire_bullet.gd" id="3_vipwn"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="4_4dcam"]
 [ext_resource type="PackedScene" uid="uid://btlb3mqfsxhfk" path="res://obj/player/bomb.tscn" id="5_xvgge"]
@@ -54,6 +55,21 @@ color_initial_ramp = SubResource("GradientTexture1D_ac50r")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylteo"]
+shader = ExtResource("2_hl7w6")
+shader_parameter/toggle = null
+shader_parameter/tolerance = 0.7
+shader_parameter/OLDCOLOR1 = Color(1, 0, 0.745098, 1)
+shader_parameter/OLDCOLOR2 = Color(0.752941, 0, 0.419608, 1)
+shader_parameter/OLDCOLOR3 = Color(1, 1, 1, 1)
+shader_parameter/OLDCOLOR4 = Color(0.627451, 0.635294, 0.619608, 1)
+shader_parameter/OLDCOLOR5 = Color(0, 0, 0, 1)
+shader_parameter/NEWCOLOR1 = Color(0, 0.764706, 0.501961, 1)
+shader_parameter/NEWCOLOR2 = Color(0.341176, 0.764706, 0, 1)
+shader_parameter/NEWCOLOR3 = Color(0.917647, 0, 0.309804, 1)
+shader_parameter/NEWCOLOR4 = Color(0.776471, 0.584314, 1, 1)
+shader_parameter/NEWCOLOR5 = Color(0, 0.635294, 0.509804, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vv3hj"]
 atlas = ExtResource("1_5gjv1")
@@ -484,6 +500,7 @@ process_material = SubResource("ParticleProcessMaterial_2jchn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_ylteo")
 sprite_frames = SubResource("SpriteFrames_37ddf")
 animation = &"walk"
 frame_progress = 0.184291
@@ -522,6 +539,7 @@ wait_time = 0.35
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_gylgy")
 
@@ -583,6 +601,7 @@ text = "1x"
 label_settings = SubResource("LabelSettings_ig31y")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+visible = false
 script = ExtResource("10_m706b")
 health = NodePath("Health")
 
@@ -672,7 +691,7 @@ bus = &"Audio"
 [connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]
 [connection signal="hurtbox_entered" from="Hitbox" to="." method="_on_hitbox_hurtbox_entered"]
 [connection signal="died" from="Hitbox/Health" to="." method="_on_health_died"]
-[connection signal="harmed" from="Hitbox/Health" to="." method="_on_health_harmed"]
 [connection signal="harmed" from="Hitbox/Health" to="." method="_on_health_changed"]
-[connection signal="healed" from="Hitbox/Health" to="." method="_on_health_healed"]
+[connection signal="harmed" from="Hitbox/Health" to="." method="_on_health_harmed"]
 [connection signal="healed" from="Hitbox/Health" to="." method="_on_health_changed"]
+[connection signal="healed" from="Hitbox/Health" to="." method="_on_health_healed"]
