@@ -9,6 +9,7 @@ const maps : Array[PackedScene] = [
 	preload("res://resources/map scenes/6.tscn"),
 	preload("res://resources/map scenes/7.tscn"),
 	preload("res://resources/map scenes/8.tscn"),
+	preload("res://resources/map scenes/9.tscn"),
 ]
 
 @onready var animation_player: AnimationPlayer = $CanvasLayer3/AnimationPlayer

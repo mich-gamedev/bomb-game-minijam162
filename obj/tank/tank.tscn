@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://ca4acqyeuy1pv"]
+[gd_scene load_steps=23 format=3 uid="uid://ca4acqyeuy1pv"]
 
 [ext_resource type="Script" path="res://obj/tank/tank.gd" id="1_ha4n2"]
 [ext_resource type="Texture2D" uid="uid://b8j8r1t28kxu4" path="res://obj/tank/tank.png" id="1_uydhm"]
 [ext_resource type="Script" path="res://components/firebullet/fire_bullet.gd" id="2_2dtfq"]
-[ext_resource type="Shader" path="res://resources/shaders/sway.gdshader" id="2_p7xli"]
+[ext_resource type="Shader" path="res://resources/shaders/flash_tick.gdshader" id="2_efx0t"]
 [ext_resource type="Script" path="res://components/object pooling/NodePooler.gd" id="3_d6hsq"]
 [ext_resource type="PackedScene" uid="uid://cyydlmngkqy4g" path="res://obj/cannonfly/cannon.tscn" id="4_7hnkx"]
 [ext_resource type="Script" path="res://components/movement/WalkAndBump.gd" id="5_w2mda"]
@@ -12,27 +12,12 @@
 [ext_resource type="Script" path="res://components/health/Health.gd" id="9_8jv3u"]
 [ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="10_nroh4"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8nw8y"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmna0"]
-seamless = true
-noise = SubResource("FastNoiseLite_8nw8y")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgb4e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wc4hj"]
 resource_local_to_scene = true
-shader = ExtResource("2_p7xli")
-shader_parameter/pixel_mode = false
-shader_parameter/pixel_amount = 32.0
-shader_parameter/distortion = 0.0
-shader_parameter/texture_noise_system = true
-shader_parameter/noise_speed = 1.0
-shader_parameter/noise_direction = -1
-shader_parameter/worley_noise_system = false
-shader_parameter/worley_cell_density = 10.0
-shader_parameter/worley_speed = 2.0
-shader_parameter/edge_and_mask = false
-shader_parameter/alpha_value = 1.0
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_kmna0")
+shader = ExtResource("2_efx0t")
+shader_parameter/enabled = true
+shader_parameter/tick_rate = 0.15
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cltom"]
 atlas = ExtResource("1_uydhm")
@@ -96,14 +81,14 @@ size = Vector2(18, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hdhgc"]
 size = Vector2(14, 3)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_ha4n2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_vgb4e")
+material = SubResource("ShaderMaterial_wc4hj")
 sprite_frames = SubResource("SpriteFrames_lghny")
 autoplay = "default"
 frame_progress = 0.101406
@@ -147,14 +132,17 @@ gravity = 960.0
 terminal_velocity = 256.0
 
 [node name="LeftRay" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 target_position = Vector2(-10, 0)
 
 [node name="RightRay" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 target_position = Vector2(10, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_2uxo4")
 
@@ -168,6 +156,7 @@ lifetime = 1.5
 script = ExtResource("7_11pbo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+visible = false
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_x4li6")
 
@@ -179,6 +168,7 @@ health = NodePath("Health")
 team = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_hdhgc")
 

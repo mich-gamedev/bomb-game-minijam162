@@ -29,12 +29,18 @@ Cursor="*res://cursor.tscn"
 Hotkeys="*res://components/misc/Hotkeys.gd"
 MusicManager="*res://obj/music_manager/music_manager.tscn"
 
+[debug]
+
+file_logging/enable_file_logging=true
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/viewport_width=224
 window/size/viewport_height=168
 window/size/mode=2
 window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 

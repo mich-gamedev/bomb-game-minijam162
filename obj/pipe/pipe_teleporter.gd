@@ -42,10 +42,13 @@ func _area_1_body_entered(body: Node2D) -> void:
 		$Area2D/In.restart()
 		$Area2D2/Out.restart()
 		ignore.append(body)
-		if body.is_in_group(&"player"):
-			body.health.can_harm = false
-		if (body is CharacterBody2D) and (point_0_angle == point_1_angle) and !(point_0_angle in [90,270]):
-			body.velocity.x = -body.velocity.x
+		if !body is Bullet:
+			if body.is_in_group(&"player"):
+				body.health.can_harm = false
+			if (body is CharacterBody2D) and (point_0_angle == point_1_angle) and !(point_0_angle in [90,270]):
+				body.velocity.x = -body.velocity.x
+		elif body is Bullet:
+			body.velocity = body.velocity.rotated(area_2.rotation - area_1.rotation)
 		await get_tree().create_timer(0.25).timeout
 		if !is_instance_valid(body): return
 		if body.is_in_group(&"player"):
@@ -53,16 +56,19 @@ func _area_1_body_entered(body: Node2D) -> void:
 		ignore.erase(body)
 
 func _area_2_body_entered(body: Node2D) -> void:
-	if (body.is_in_group(&"player") or body.is_in_group(&"enemy")) and !(body in ignore):
+	if (body.is_in_group(&"player") or body.is_in_group(&"enemy") or body is Bullet) and !(body in ignore):
 		body.set_deferred("global_position", area_1.global_position)
 		$Area2D2/Enter.play()
 		$Area2D2/In.restart()
 		$Area2D/Out.restart()
 		ignore.append(body)
-		if body.is_in_group(&"player"):
-			body.health.can_harm = false
-		if (body is CharacterBody2D) and (point_0_angle == point_1_angle) and !(point_1_angle in [90,270]):
-			body.velocity.x = -body.velocity.x
+		if !body is Bullet:
+			if body.is_in_group(&"player"):
+				body.health.can_harm = false
+			if (body is CharacterBody2D) and (point_0_angle == point_1_angle) and !(point_1_angle in [90,270]):
+				body.velocity.x = -body.velocity.x
+		elif body is Bullet:
+			body.velocity = body.velocity.rotated(area_2.rotation - area_1.rotation)
 		await get_tree().create_timer(0.25).timeout
 		if !is_instance_valid(body): return
 		if body.is_in_group(&"player"):

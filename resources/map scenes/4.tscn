@@ -35,6 +35,7 @@ layer_0/tile_data = PackedInt32Array(196606, 262144, 1, 131070, 262144, 1, 65534
 [node name="Path2D" parent="." instance=ExtResource("4_pfo1o")]
 position = Vector2(-55, 43)
 curve = SubResource("Curve2D_s4x6k")
+point_0_angle = 1.5708
 
 [node name="Path2D2" parent="." instance=ExtResource("4_pfo1o")]
 position = Vector2(-52, 70)

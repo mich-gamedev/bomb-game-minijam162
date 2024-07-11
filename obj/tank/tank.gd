@@ -23,7 +23,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_health_died() -> void:
-	(sprite.material as ShaderMaterial).set_shader_parameter("distortion", 0.1)
+	(sprite.material as ShaderMaterial).set_shader_parameter("enabled", true)
 	particle.restart()
 	await get_tree().create_timer(1.0).timeout
 	death_bullet.fire(randf_range(0, TAU))

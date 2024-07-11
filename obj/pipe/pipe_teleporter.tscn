@@ -96,8 +96,8 @@ curve = SubResource("Curve2D_nct1x")
 script = ExtResource("1_4k0y0")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 131
-collision_mask = 131
+collision_layer = 163
+collision_mask = 163
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ovpd3")

@@ -15,7 +15,7 @@ func _ready():
 
 func _process(delta):
 	velocity += gravity * delta
-	global_position += velocity
+	global_position += velocity * delta
 	timer += delta
 	if timer >= time_to_destroy:
 		queue_free()
