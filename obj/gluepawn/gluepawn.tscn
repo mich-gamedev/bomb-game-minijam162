@@ -1,6 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bacjwfuyig6gb"]
+[gd_scene load_steps=24 format=3 uid="uid://bacjwfuyig6gb"]
 
 [ext_resource type="Texture2D" uid="uid://dochxvi1wy3ec" path="res://obj/gluepawn/gluepawn.png" id="1_1c5ah"]
+[ext_resource type="Script" path="res://obj/gluepawn/gluepawn.gd" id="1_e4gaf"]
+[ext_resource type="PackedScene" uid="uid://dq4kbojomnhfr" path="res://components/health/enemy_death.tscn" id="2_hebkp"]
+[ext_resource type="Script" path="res://components/health/Hitbox.gd" id="4_ek4mc"]
+[ext_resource type="Script" path="res://components/health/Health.gd" id="5_p40xi"]
+[ext_resource type="Script" path="res://components/health/queue_free_on_death.gd" id="6_52h4b"]
+[ext_resource type="Script" path="res://components/health/Hurtbox.gd" id="7_b3ucf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kls7y"]
 atlas = ExtResource("1_1c5ah")
@@ -108,14 +114,29 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubv1t"]
+size = Vector2(7, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4sr4"]
+size = Vector2(11, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkgs5"]
+size = Vector2(9, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tv0fk"]
+size = Vector2(9, 13)
+
+[node name="GluePawn" type="CharacterBody2D"]
+script = ExtResource("1_e4gaf")
+
+[node name="EnemyDeath" parent="." instance=ExtResource("2_hebkp")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hynw3")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.38937
+frame_progress = 0.74574
 offset = Vector2(0, -12)
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -127,3 +148,43 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://obj/gluepawn/gluepawn.ase"
 }
 metadata/_aseprite_wizard_source_file_hash_ = "6349d845c14d91b98773bb12cccd8ddc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -7.5)
+shape = SubResource("RectangleShape2D_ubv1t")
+
+[node name="JumpHitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 256
+script = ExtResource("4_ek4mc")
+team = 1
+
+[node name="Health" type="Node" parent="JumpHitbox"]
+script = ExtResource("5_p40xi")
+max_health = 2.0
+starting_health = 2.0
+world_increment = 0.1
+
+[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health"]
+script = ExtResource("6_52h4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
+position = Vector2(-0.5, -14)
+shape = SubResource("RectangleShape2D_u4sr4")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("7_b3ucf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_xkgs5")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_ek4mc")
+team = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, -6.5)
+shape = SubResource("RectangleShape2D_tv0fk")
+
+[connection signal="died" from="JumpHitbox/Health" to="EnemyDeath" method="_on_health_died"]

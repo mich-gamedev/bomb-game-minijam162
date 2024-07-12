@@ -19,24 +19,23 @@ void fragment() {
     if (toggle)
 	{
 		vec4 curr_color = texture(TEXTURE,UV); 
-	
-	
-    	if (distance(curr_color, OLDCOLOR1) < tolerance)
+		
+		if (distance(curr_color, OLDCOLOR1) < tolerance)
 		{
-        COLOR = NEWCOLOR1;
-   	 }
+			COLOR = NEWCOLOR1;
+	 	}
 		else if (distance(curr_color, OLDCOLOR2) < tolerance)
 		{
-   	     COLOR = NEWCOLOR2;
-   	 }
+			COLOR = NEWCOLOR2;
+		}
 		else if (distance(curr_color, OLDCOLOR3) < tolerance)
 		{
-   	     COLOR = NEWCOLOR3;
-   	 }
+			COLOR = NEWCOLOR3;
+		}
 		else if (distance(curr_color, OLDCOLOR4) < tolerance)
 		{
-   	     COLOR = OLDCOLOR4;
-   	 }else if (distance(curr_color, OLDCOLOR5) < tolerance)
+			COLOR = OLDCOLOR4;
+		}else if (distance(curr_color, OLDCOLOR5) < tolerance)
 		{
 			COLOR = NEWCOLOR5;
 		}else
