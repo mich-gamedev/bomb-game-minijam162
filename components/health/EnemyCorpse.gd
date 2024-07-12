@@ -10,7 +10,7 @@ var time_to_destroy: int = 5
 
 func _ready():
 	start_pos = global_position
-	
+
 	velocity = Vector2(randf_range(-0.4, 0.4), 1).normalized() * speed
 
 func _process(delta):

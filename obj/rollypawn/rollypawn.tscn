@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct8bldcwhapdg"]
+
+[ext_resource type="Texture2D" uid="uid://dltcm65y8qq14" path="res://obj/rollypawn/rollypawn.png" id="1_hv42h"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hv42h")

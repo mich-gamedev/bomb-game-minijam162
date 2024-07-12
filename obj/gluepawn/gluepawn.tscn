@@ -1,0 +1,129 @@
+[gd_scene load_steps=14 format=3 uid="uid://bacjwfuyig6gb"]
+
+[ext_resource type="Texture2D" uid="uid://dochxvi1wy3ec" path="res://obj/gluepawn/gluepawn.png" id="1_1c5ah"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kls7y"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahors"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu336"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5b7y"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3asu5"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbu7m"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjyib"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(32, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ahhh"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(48, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqovc"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(0, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xy1m"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(16, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro4hy"]
+atlas = ExtResource("1_1c5ah")
+region = Rect2(32, 48, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hynw3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kls7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahors")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_bu336")
+}],
+"loop": false,
+"name": &"charge",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kls7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5b7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3asu5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbu7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjyib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ahhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjyib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqovc")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xy1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro4hy")
+}],
+"loop": false,
+"name": &"land",
+"speed": 10.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_hynw3")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.38937
+offset = Vector2(0, -12)
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://obj/gluepawn/gluepawn.ase"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "6349d845c14d91b98773bb12cccd8ddc"
