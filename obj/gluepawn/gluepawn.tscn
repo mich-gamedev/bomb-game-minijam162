@@ -128,15 +128,16 @@ size = Vector2(9, 13)
 
 [node name="GluePawn" type="CharacterBody2D"]
 script = ExtResource("1_e4gaf")
+gravity = 640.0
+terminal_velocity = 256.0
 
 [node name="EnemyDeath" parent="." instance=ExtResource("2_hebkp")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hynw3")
-animation = &"idle"
+animation = &"charge"
 autoplay = "idle"
-frame_progress = 0.74574
 offset = Vector2(0, -12)
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -153,20 +154,23 @@ metadata/_aseprite_wizard_source_file_hash_ = "6349d845c14d91b98773bb12cccd8ddc"
 position = Vector2(-0.5, -7.5)
 shape = SubResource("RectangleShape2D_ubv1t")
 
-[node name="JumpHitbox" type="Area2D" parent="."]
+[node name="JumpHitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 256
 collision_mask = 256
 script = ExtResource("4_ek4mc")
+health = NodePath("Health")
 team = 1
 
 [node name="Health" type="Node" parent="JumpHitbox"]
 script = ExtResource("5_p40xi")
 max_health = 2.0
 starting_health = 2.0
-world_increment = 0.1
+world_increment = 0.15
 
-[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health"]
+[node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor")]
 script = ExtResource("6_52h4b")
+health = NodePath("..")
+actor = NodePath("../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
 position = Vector2(-0.5, -14)
@@ -179,12 +183,16 @@ script = ExtResource("7_b3ucf")
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_xkgs5")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("4_ek4mc")
+health = NodePath("../JumpHitbox/Health")
 team = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-0.5, -6.5)
 shape = SubResource("RectangleShape2D_tv0fk")
 
+[node name="TimeBetweenJumps" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="died" from="JumpHitbox/Health" to="EnemyDeath" method="_on_health_died"]
