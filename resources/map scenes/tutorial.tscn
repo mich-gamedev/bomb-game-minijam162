@@ -802,6 +802,9 @@ TO PLAY"
 [node name="GluePawn" parent="." instance=ExtResource("23_kduqa")]
 position = Vector2(100, 92)
 
+[node name="GluePawn2" parent="." instance=ExtResource("23_kduqa")]
+position = Vector2(192, 152)
+
 [connection signal="body_entered" from="Settings" to="Settings" method="_on_body_entered"]
 [connection signal="body_exited" from="Settings" to="Settings" method="_on_body_exited"]
 [connection signal="player_stomped" from="Settings/Hitbox" to="Settings" method="_on_hitbox_player_stomped"]
