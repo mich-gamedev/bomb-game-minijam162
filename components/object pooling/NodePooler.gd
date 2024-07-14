@@ -12,8 +12,6 @@ class_name NodePooler extends Node
 @export var default_parent: Node
 ## if true, stashed nodes will be automatically disabled and hidden
 @export var auto_disable: bool = true
-## if true, disabled nodes will automatically be stashed [br][br][b]WARNING:[/b] if multiple poolers use the same pool, true will take priority over false
-@export var auto_stash: bool = true
 
 signal node_created(node: Node)
 
@@ -29,16 +27,12 @@ func _ready() -> void:
 		for i in default_count - ObjectPool.pools[pool_name].size():
 			add_and_stash()
 
-func _process(_delta: float) -> void:
-	for i in ObjectPool.pools[pool_name]:
-		if !is_instance_valid(i): ObjectPool.pools[pool_name].erase(i)
-	var pool_dict: Dictionary = ObjectPool.pools[pool_name]
-	if auto_stash:
-		for i in pool_dict:
-			if !is_instance_valid(i): return
-			pool_dict[i] = i.process_mode == Node.PROCESS_MODE_DISABLED
+
+
 
 func grab_available_object(unstash := true, fill_empty := true) -> Node:
+	for i in ObjectPool.pools[pool_name].keys():
+		if !is_instance_valid(i): ObjectPool.pools[pool_name].erase(i)
 	var available: Array = ObjectPool.pools[pool_name].keys().filter(
 		func(n): return is_instance_valid(n) and ObjectPool.pools[pool_name][n] == true)
 	if available.is_empty():

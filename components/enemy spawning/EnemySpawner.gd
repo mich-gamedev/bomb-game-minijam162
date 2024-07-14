@@ -20,6 +20,7 @@ const spawn_rates: Array[EnemySpawnRate] = [
 	preload("res://resources/spawnrates/cacturtle.tres"),
 	preload("res://resources/spawnrates/8ball.tres"),
 	preload("res://resources/spawnrates/tank.tres"),
+	preload("res://resources/spawnrates/gluepawn.tres"),
 ] ## will affect spawnable_enemies's list based on the samples from the spawn curves
 
 signal wave_just_started

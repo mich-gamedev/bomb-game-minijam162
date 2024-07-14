@@ -123,7 +123,7 @@ animations = [{
 size = Vector2(7, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4sr4"]
-size = Vector2(11, 2)
+size = Vector2(10.5, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xkgs5"]
 size = Vector2(9, 2)
@@ -132,12 +132,13 @@ size = Vector2(9, 2)
 size = Vector2(9, 15)
 
 [node name="GluePawn" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 5
 script = ExtResource("1_e4gaf")
-friction = 160.0
-time_range = Vector2(0.5, 3)
-gravity = 256.0
+jump_force = 144.0
+friction = 240.0
+time_range = Vector2(0.25, 1.5)
+gravity = 360.0
 terminal_velocity = 360.0
 
 [node name="EnemyDeath" parent="." instance=ExtResource("2_hebkp")]
@@ -176,8 +177,8 @@ team = 1
 
 [node name="Health" type="Node" parent="JumpHitbox"]
 script = ExtResource("5_p40xi")
-max_health = 2.0
-starting_health = 2.0
+max_health = 4.0
+starting_health = 4.0
 world_increment = 0.15
 
 [node name="FreeOnDeath" type="Node" parent="JumpHitbox/Health" node_paths=PackedStringArray("health", "actor")]
@@ -186,7 +187,7 @@ health = NodePath("..")
 actor = NodePath("../../..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="JumpHitbox"]
-position = Vector2(-1, -15)
+position = Vector2(-0.75, -15)
 shape = SubResource("RectangleShape2D_u4sr4")
 
 [node name="Hurtbox" type="Area2D" parent="."]

@@ -22,9 +22,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		if velocity.y < 0 and sprite.animation != &"jump": sprite.play(&"jump")
 		if velocity.y > 0 and sprite.animation != &"fall": sprite.play(&"fall")
-	if is_on_wall():
-		print("gluepawn on wall")
-		velocity.x = sign(-velocity.x) * 256
 	move_and_slide()
 
 func jump() -> void:
@@ -38,7 +35,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			sprite.play(&"idle")
 		&"charge":
 			jump()
-
 
 func _on_jump_timer_timeout() -> void:
 	sprite.play(&"charge")
